@@ -83,11 +83,17 @@ with open('extension_results_xLEO/contactPlan/contact_plan_7d_name_to_id_mapping
         name, id = line.strip().split()
         name_to_id[id] = name
 
-# To choose how many of each do you want to compute
-number_of_LEOS_wanted =[66]
-number_of_GS_wanted = [1,5,10,21]
-number_of_HAGS_GS_wanted = [1,5,10,21]
+# Shareable parameters
+number_of_LEOS_wanted =[1]
+number_of_GS_wanted = [1,5,10]
+number_of_HAGS_GS_wanted = [1,3,5]
+number_of_repetitions = 20
+TTR = [5,25]
+TTF = [0.1,0.2,0.5,1,2,5,10,15,20,25,30,35,40]
+SDR = 0
 
+# Specific parameters
+number_of_bundles = 50
 
 # Find the first key that have a value that began with 'LEO'
 first_LEO = 1
@@ -102,13 +108,13 @@ for number_of_LEOS in number_of_LEOS_wanted:
 
     for number_of_GS in number_of_GS_wanted:
         GST_IDS_to_keep = [2 + 2*i for i in range(number_of_GS)]
-        output_file = 'dtnsim/simulations/HAPS_Analysis/FilteredContactPlans/contact_plan_7d_node-ids_%sLEO_%sGS.txt' % (number_of_LEOS, number_of_GS)
+        output_file = 'dtnsim/simulations/HAPS_Analysis/FilteredContactPlans/contact_plan_7d_node-ids_%sLEO_%sGS_%sSDR.txt' % (number_of_LEOS, number_of_GS, SDR)
         contact_filterer(input_file, output_file, LEO_IDS_to_keep, GST_IDS_to_keep, [])
 
     for number_of_HAGS_GS in number_of_HAGS_GS_wanted:
         GST_IDS_to_keep = [2 + 2*i for i in range(number_of_HAGS_GS)]
         HAPS_IDS_to_keep = [3 + 2*i for i in range(number_of_HAGS_GS)]
-        output_file = 'dtnsim/simulations/HAPS_Analysis/FilteredContactPlans/contact_plan_7d_node-ids_%sLEO_%sHAP_%sGS.txt' % (number_of_LEOS, number_of_HAGS_GS, number_of_HAGS_GS)
+        output_file = 'dtnsim/simulations/HAPS_Analysis/FilteredContactPlans/contact_plan_7d_node-ids_%sLEO_%sHAP_%sGS_%sSDR.txt' % (number_of_LEOS, number_of_HAGS_GS, number_of_HAGS_GS, SDR)
         contact_filterer(input_file, output_file, LEO_IDS_to_keep, GST_IDS_to_keep, HAPS_IDS_to_keep)
 
 
@@ -120,9 +126,9 @@ for number_of_LEOS in number_of_LEOS_wanted:
 FOLDERS_NAME = []
 for number_of_LEOS in number_of_LEOS_wanted:
     for number_of_GS in number_of_GS_wanted:
-        FOLDERS_NAME.append('%sLEO_%sGS' % (number_of_LEOS, number_of_GS))
+        FOLDERS_NAME.append('%sLEO_%sGS_%sSDR' % (number_of_LEOS, number_of_GS, SDR))
     for number_of_HAGS_GS in number_of_HAGS_GS_wanted:
-        FOLDERS_NAME.append('%sLEO_%sHAP_%sGS' % (number_of_LEOS, number_of_HAGS_GS, number_of_HAGS_GS))
+        FOLDERS_NAME.append('%sLEO_%sHAP_%sGS_%sSDR' % (number_of_LEOS, number_of_HAGS_GS, number_of_HAGS_GS, SDR))
        
 for output_file_name in FOLDERS_NAME: 
     folder_path = 'dtnsim/simulations/HAPS_Analysis/' + output_file_name
@@ -132,15 +138,15 @@ for output_file_name in FOLDERS_NAME:
         file.write('[General]\n')
         file.write('allow-object-stealing-on-deletion = true\n')
         file.write('network = src.dtnsim\n')
-        file.write('repeat = 100\n')
+        file.write('repeat = %s\n' % number_of_repetitions)
         file.write('sim-time-limit = 604801s\n')
         file.write('outputvectormanager-class="omnetpp::envir::SqliteOutputVectorManager"\n')
         file.write('outputscalarmanager-class="omnetpp::envir::SqliteOutputScalarManager"\n')
         file.write('**.vector-recording=false\n')
         file.write('result-dir = results\n')
         file.write('dtnsim.nodesNumber = 109\n')
-        file.write("#dtnsim.node[*].dtn.routing = \"cgrModel350\"\n")
-        file.write("dtnsim.node[*].dtn.routing = \"cgrModelRev17\"\n")
+        file.write("dtnsim.node[*].dtn.routing = \"cgrModel350\"\n")
+        file.write("#dtnsim.node[*].dtn.routing = \"cgrModelRev17\"\n")
         file.write("dtnsim.node[*].dtn.routingType = \"routeListType:allPaths-firstDepleted,volumeAware:allContacts,extensionBlock:on,contactPlan:local\"\n")
         file.write("#dtnsim.node[*].dtn.printRoutingDebug=true\n")
         file.write("\n")
@@ -151,17 +157,25 @@ for output_file_name in FOLDERS_NAME:
         file.write("#dtnsim.central.saveLpFlows = true\n")
         file.write("\n")
         file.write("# traffic generation\n")
-        file.write("dtnsim.node[44].app.enable=true\n")
-        file.write("dtnsim.node[44].app.bundlesNumber=\"50\"\n")
-        file.write("dtnsim.node[44].app.start=\"0\"\n")
-        file.write("dtnsim.node[44].app.destinationEid=\"1\"\n")
-        file.write("dtnsim.node[44].app.size=\"100\"\n")
+        for i in range(number_of_LEOS):
+            node_index = first_LEO + i
+            file.write("dtnsim.node[%s].app.enable=true\n" % node_index)
+            file.write("dtnsim.node[%s].app.bundlesNumber=\"%s\"\n" % (node_index, number_of_bundles))
+            file.write("dtnsim.node[%s].app.start=\"0\"\n" % node_index)
+            file.write("dtnsim.node[%s].app.destinationEid=\"1\"\n" % node_index)
+            file.write("dtnsim.node[%s].app.size=\"100\"\n" % node_index)
+        
+        # Put the right SDR for the HAPS
+        for i in range(number_of_HAGS_GS):
+            node_index = 3 + 2*i
+            file.write("dtnsim.node[%s].dtn.sdrSize=%s\n" % (node_index, SDR))
+
         file.write("#dtnsim.node[3].dtn.sdrSize = 9\n")
         file.write("\n")
         file.write("# Nodes's failure rates\n")
-        file.write("dtnsim.node[*].fault.faultSeed = ${repetition}*10\n")
-        file.write("dtnsim.node[*].fault.meanTTF = ${TTF=0.1h,0.2h,0.5h,1h,2h,5h,10h,15h,20h,25h,30h,35h,40h}\n")
-        file.write("dtnsim.node[*].fault.meanTTR = ${TTR=5h,10h,15h,20h,25h}\n")
+        file.write("dtnsim.node[*].fault.faultSeed = ${repetition}*100\n")
+        file.write("dtnsim.node[*].fault.meanTTF = ${TTF=%s}\n" % ','.join([str(ttf)+'h' for ttf in TTF]))
+        file.write("dtnsim.node[*].fault.meanTTR = ${TTR=%s}\n" % ','.join([str(ttr)+'h' for ttr in TTR]))
         file.write("\n")
         file.write("dtnsim.node[2].fault.enable = true\n")
         file.write("dtnsim.node[4].fault.enable = true\n")
@@ -190,7 +204,7 @@ for output_file_name in FOLDERS_NAME:
     with open('dtnsim/simulations/HAPS_Analysis/' + output_file_name + '/script.sh', 'w') as file:
         file.write("#!/bin/bash\n")
         file.write("\n")
-        file.write("opp_runall -j4 ../../../dtnsim omnetpp.ini -n ../../../src -u Cmdenv -c General\n")
+        file.write("opp_runall -j8 ../../../dtnsim omnetpp.ini -n ../../../src -u Cmdenv -c General\n")
         file.write("\n")
         file.write(": <<'END'\n")
         file.write("END\n")

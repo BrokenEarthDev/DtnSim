@@ -10,16 +10,21 @@ import json
 import seaborn as sns
 
 #--------------------------------------- PARAMETERS ---------------------------------------#
-number_of_LEOS_wanted = [5]
-number_of_GS_wanted = [1,2,5,10]
-number_of_HAGS_GS_wanted = [1,2,3,4,5]
-number_of_stations = len(number_of_GS_wanted) + len(number_of_HAGS_GS_wanted)
+# Shareable parameters
+number_of_LEOS_wanted =[33]
+number_of_GS_wanted = [1]
+number_of_HAGS_GS_wanted = [1]
+number_of_repetitions = 10
+TTR = [5,25]
+TTF = [0.1,0.2,0.5,1,2,5,10]
+#SDR = [0,2]
 
-INPUT_PATH = "dtnsim/simulations/HAPS_Analysis"
-TTR = [5,10,15,20,25]
+
+
+repetitions = list(range(0,number_of_repetitions))
 count = []
-TTF = [0.1,0.2,0.5,1,2,5,10,15,20,25,30,35,40]
-repetitions = list(range(0,100))
+INPUT_PATH = "dtnsim/simulations/HAPS_Analysis"
+number_of_stations = len(number_of_GS_wanted) + len(number_of_HAGS_GS_wanted)
 
 m0,m1 = "s","o"
 mar0,mar1 = 7,7
@@ -41,7 +46,7 @@ clr = dark_palette + light_palette
 
 
 # One line of value for each TTR
-values= [5, 2, 0.5, 0.2, 0.1, 0.1, 0.1, 0.1, 0.1]
+values= [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
 
 
 #--------------------------------------- PLOTING ---------------------------------------#
@@ -50,7 +55,7 @@ for leos in number_of_LEOS_wanted:
     li = []
     for folder in os.listdir('dtnsim/simulations/HAPS_Analysis'):
         if len(str(leos)) == 2:
-            if folder[0] + folder[1] == leos:
+            if folder[0] + folder[1] == str(leos):
                 scenarios.append('/' + folder + '/results/')
                 li.append(folder)
         else:
@@ -81,6 +86,30 @@ for leos in number_of_LEOS_wanted:
 
         for stations in range(number_of_stations):
             count.append(len([value for value in ttf_values  if value < values[stations]]))
+
+#--------------------------------------- PLOT SDR ---------------------------------------#
+
+        # fig, ax = plt.subplots(figsize=(WIDTH,HEIGHT))
+        # for i in range(len(number_of_GS_wanted)):
+        #     for sdr in SDR:
+        #         sns.lineplot(x=ttf_values, y=resultsDR[i][sdr], color=clr[i], marker=m0, label=f"{liHAGS[i]} - SDR Size {sdr}", markersize=mar0, markeredgecolor=clr[i], markerfacecolor='none', markeredgewidth=medgewidth, ax=ax)
+
+        # for j in range(len(number_of_GS_wanted), len(number_of_GS_wanted) + len(number_of_HAGS_GS_wanted)):
+        #     for sdr in SDR:
+        #         sns.lineplot(x=ttf_values, y=resultsDR[j][sdr], color=clr[j], marker=m1, label=f"{liHAGS[j]} - SDR Size {sdr}", markersize=mar1, markeredgecolor=clr[j], ax=ax)
+
+        # ax.set_xlabel("TCC [hours]", fontsize=13)
+        # ax.set_ylabel("Delivery ratio [% of files generated]", fontsize=13)
+        # plt.tight_layout()
+
+        # plt.grid(linewidth=LINEWIDTH, zorder=0)
+        # ax.legend(loc='lower right', prop={'size': 10})
+        # plt.xscale('log')
+        # plt.xticks(TTF, [str(val) for val in TTF])
+        # plt.savefig("extension_results_xLEO/plots/delivery_ratio_LEO=%s_TTR=%s.pdf" % (str(leos), str(ttr)))
+        # plt.cla()
+        # plt.clf()
+
 
 #--------------------------------------- PLOT DR ---------------------------------------#
         fig, ax = plt.subplots(figsize=(WIDTH,HEIGHT))

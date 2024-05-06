@@ -1,5 +1,3 @@
-# from simulation_creator import number_of_LEOS_wanted, number_of_GS_wanted, number_of_HAGS_GS_wanted
-
 import sqlite3
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -118,16 +116,18 @@ def get_buffer_occupancy(INPUT_PATH, scenarios, xs, repetitions, node):
 
 
 #--------------------------------------- PARAMETERS ---------------------------------------#
-number_of_LEOS_wanted = [5]
-number_of_GS_wanted = [1,2,5,10]
-number_of_HAGS_GS_wanted = [1,2,3,4,5]
+# Shareable parameters
+number_of_LEOS_wanted =[1]
+number_of_GS_wanted = [1,5,10]
+number_of_HAGS_GS_wanted = [1,3,5]
+number_of_repetitions = 20
+TTR = [5,25]
+TTF = [0.1,0.2,0.5,1,2,5,10,15,20,25,30,35,40]
+SDR = [0,1,2]
+
 
 INPUT_PATH = "dtnsim/simulations/HAPS_Analysis"
-TTR = [5,10,15,20,25]
-TTF = [0.1,0.2,0.5,1,2,5,10,15,20,25,30,35,40]
-repetitions = list(range(0,100))
-
-
+repetitions = list(range(0,number_of_repetitions))
 #--------------------------------------- PROCESSING ---------------------------------------#
 for leos in number_of_LEOS_wanted:
     scenarios = []
@@ -135,13 +135,14 @@ for leos in number_of_LEOS_wanted:
     # Get the scenarios names by reading the folders in the directory
     for folder in os.listdir('dtnsim/simulations/HAPS_Analysis'):
         if len(str(leos)) == 2:
-            if folder[0] + folder[1] == leos:
+            if folder[0] + folder[1] == str(leos):
                 scenarios.append('/' + folder + '/results/')
                 li.append(folder)
         else:
             if folder[0] == str(leos) and not folder[1].isdigit():
                 scenarios.append('/' + folder + '/results/')
                 li.append(folder)
+    
 
     # Iterate over each TTR
     for ttr in TTR:
