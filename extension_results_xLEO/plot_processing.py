@@ -294,7 +294,7 @@ for type in typeOfScenario:
     for i in range(number_of_random_failures):
         li.append("5LEO_5HAP_5GS_TTR_%s_TTF_%s_%s" % (TTRinString[i], TTFinString[i], type))
 
-    with open('./extension_results_xLEO/data_json/results_LEO=5_TTR=[25, 25, 25, 25, 25].json', 'r') as json_file:
+    with open('./extension_results_xLEO/data_json/results_LEO=5_TTR=25.json', 'r') as json_file:
         data = json.load(json_file)
     
     for scenario in li:

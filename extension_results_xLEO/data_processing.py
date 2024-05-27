@@ -125,7 +125,7 @@ def get_buffer_occupancy(INPUT_PATH, scenarios, xs, repetitions, nodes):
 number_of_LEOS_wanted = [5]
 number_of_GS_wanted = []
 number_of_HAGS_GS_wanted = [5]
-number_of_repetitions = 20
+number_of_repetitions = 100
 # TTR = [5,25]
 # TTF = [0.1,0.2,0.5,1,2,5,10,15,20,25,30,35,40]
 
@@ -176,33 +176,34 @@ for leos in number_of_LEOS_wanted:
     #         simulationName.append('%sLEO_%sHAP_%sGS_EQ' % (number_of_LEOS, number_of_HAGS_GS, number_of_HAGS_GS))
 
     # Iterate over each TTR
-    for ttr in TTR:
-        # Get the results
-        #print(scenarios)
-        resultsDR = get_delivery_ratio(INPUT_PATH, scenarios, TTF, repetitions, ttr)
-        resultsDD = get_delivery_delay(INPUT_PATH, scenarios, TTF, repetitions, ttr)
-        resultsBO = get_buffer_occupancy(INPUT_PATH, scenarios, TTF, repetitions, [3, 5, 7, 9, 11])
+    # for ttr in TTR:
+    ttr = 25
+    # Get the results
+    #print(scenarios)
+    resultsDR = get_delivery_ratio(INPUT_PATH, scenarios, TTF, repetitions, ttr)
+    resultsDD = get_delivery_delay(INPUT_PATH, scenarios, TTF, repetitions, ttr)
+    resultsBO = get_buffer_occupancy(INPUT_PATH, scenarios, TTF, repetitions, [3, 5, 7, 9, 11])
 
-        # Save the results in a json file
-        data = {
-            "ttf_values": resultsDR[scenarios[0]][0],
-            "delivery_ratio": {
-                scenario: result[1] for scenario, result in zip(simulationName, resultsDR.values())
-            },
-            "delivery_delay": {
-                scenario: result[1] for scenario, result in zip(simulationName, resultsDD.values())
-            },
-            "buffer_occupancy_avg": {
-                scenario: result[1] for scenario, result in zip(simulationName, resultsBO.values())
-            },
-            "buffer_occupancy_max": {
-                scenario: result[2] for scenario, result in zip(simulationName, resultsBO.values())
-            }
+    # Save the results in a json file
+    data = {
+        "ttf_values": resultsDR[scenarios[0]][0],
+        "delivery_ratio": {
+            scenario: result[1] for scenario, result in zip(simulationName, resultsDR.values())
+        },
+        "delivery_delay": {
+            scenario: result[1] for scenario, result in zip(simulationName, resultsDD.values())
+        },
+        "buffer_occupancy_avg": {
+            scenario: result[1] for scenario, result in zip(simulationName, resultsBO.values())
+        },
+        "buffer_occupancy_max": {
+            scenario: result[2] for scenario, result in zip(simulationName, resultsBO.values())
         }
+    }
 
 
-        with open('extension_results_xLEO/data_json/results_LEO=%s_TTR=%s.json' % (leos, ttr), 'w') as json_file:
-            json.dump(data, json_file)
+    with open('extension_results_xLEO/data_json/results_LEO=%s_TTR=%s.json' % (leos, ttr), 'w') as json_file:
+        json.dump(data, json_file)
 
-        print("Data processing for %s LEOS and for TTR=%s is done" % (leos,ttr))
+    print("Data processing for %s LEOS and for TTR=%s is done" % (leos,ttr))
 
