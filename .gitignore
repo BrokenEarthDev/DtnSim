@@ -11,3 +11,4 @@ dtnsim/dtnsim
 
 dtnsim/simulations/HAPS_Analysis/**/results
 dtnsim/simulations/HAPS_Analysis/**/Makefile.*
+extension_results_xLEO/Tests

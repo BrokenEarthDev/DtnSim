@@ -7,6 +7,7 @@
 #include <src/node/dtn/routing/Routing.h>
 #include <src/node/dtn/routing/RoutingCgrModel350.h>
 #include <src/node/dtn/routing/RoutingCgrModelRev17.h>
+#include <src/node/dtn/routing/RoutingCgrModelRev17Distribution.h>
 #include <src/node/dtn/routing/RoutingCgrModelYen.h>
 #include <src/node/dtn/routing/RoutingDirect.h>
 #include <src/node/dtn/routing/RoutingEpidemic.h>

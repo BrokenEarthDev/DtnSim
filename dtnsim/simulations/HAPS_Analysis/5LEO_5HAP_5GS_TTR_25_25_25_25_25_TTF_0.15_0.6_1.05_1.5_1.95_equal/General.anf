@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<analysis version="2">
+    <inputs>
+        <input pattern="/dtnsim/simulations/HAPS_Analysis/5LEO_5HAP_5GS_TTR_25_25_25_25_25_TTF_0.15_0.6_1.05_1.5_1.95_equal/results/General-*.vec"/>
+        <input pattern="/dtnsim/simulations/HAPS_Analysis/5LEO_5HAP_5GS_TTR_25_25_25_25_25_TTF_0.15_0.6_1.05_1.5_1.95_equal/results/General-*.sca"/>
+    </inputs>
+    <charts/>
+</analysis>

@@ -2,7 +2,7 @@
 # OMNeT++/OMNEST Makefile for dtnsim
 #
 # This file was generated with the command:
-#  opp_makemake -f --deep -O out -e cc -I. -I/usr/include/python3.8 -lpython3.8 -Xsrc/node/dtn/routing/unibocgr/dtnme
+#  opp_makemake -f --deep -O out -e cc -I. -I/usr/include/python3.10 -lpython3.10 -Xsrc/node/dtn/routing/unibocgr/dtnme
 #
 
 # Name of target to be created (-o option)
@@ -19,13 +19,13 @@ USERIF_LIBS = $(ALL_ENV_LIBS) # that is, $(QTENV_LIBS) $(CMDENV_LIBS)
 #USERIF_LIBS = $(QTENV_LIBS)
 
 # C++ include paths (with -I)
-INCLUDE_PATH = -I. -I/usr/include/python3.8
+INCLUDE_PATH = -I. -I/usr/include/python3.10
 
 # Additional object and library files to link with
 EXTRA_OBJS =
 
 # Additional libraries (-L, -l options)
-LIBS =  -lpython3.8
+LIBS =  -lpython3.10
 
 # Output directory
 PROJECT_OUTPUT_DIR = out
@@ -50,6 +50,7 @@ OBJS = \
     $O/src/node/dtn/routing/RoutingCgrModel350_Hops.o \
     $O/src/node/dtn/routing/RoutingCgrModel350_Probabilistic.o \
     $O/src/node/dtn/routing/RoutingCgrModelRev17.o \
+    $O/src/node/dtn/routing/RoutingCgrModelRev17Distribution.o \
     $O/src/node/dtn/routing/RoutingCgrModelYen.o \
     $O/src/node/dtn/routing/RoutingDeterministic.o \
     $O/src/node/dtn/routing/RoutingDirect.o \

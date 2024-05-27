@@ -9,6 +9,9 @@ simple Dtn
         string routing = default("direct");
         string routingType = default("none");
         int bundlesCopies = default(1);
+        int numHags = default(1);
+        string MeanTTR = default("");
+        string MeanTTF = default("");
         double sContactProb = default(1.0);
         bool printRoutingDebug = default(false);
         bool saveBundleMap = default(false);

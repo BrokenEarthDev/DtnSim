@@ -640,6 +640,15 @@ void RoutingCgrModelRev17::cgrForward(BundlePkt * bundle) {
 		bestRoute = min_element(routeTable_.at(terminusNode).begin(), routeTable_.at(terminusNode).end(),
 				this->compareRoutes);
 
+		// Print all hops in each route in routeTable
+		for (const CgrRoute& route : routeTable_.at(terminusNode)) {
+			cout << "Route: ";
+			for (const Contact* hop : route.hops) {
+				cout << hop->getId() << " ";
+			}
+			cout << endl;
+		}
+
 		// Save tableEntriesExplored metric. Notice that
 		// explored also includes filtered routes (i.e., pessimistic)
 		tableEntriesExplored = routeTable_.at(terminusNode).size();
@@ -649,7 +658,7 @@ void RoutingCgrModelRev17::cgrForward(BundlePkt * bundle) {
 	} else {
 		// Enqueue to limbo
 		bundle->setNextHopEid(NO_ROUTE_FOUND);
-		sdr_->enqueueBundleToContact(bundle, 0);
+		sdr_->enqueueBundleToNode(bundle, 0);
 
 		cout << "*BestRoute not found (enqueing to limbo)" << endl;
 	}
@@ -748,11 +757,11 @@ void RoutingCgrModelRev17::cgrEnqueue(BundlePkt * bundle, CgrRoute *bestRoute) {
 		cout << "queuing bundle in contact " << bestRoute->hops.at(0)->getId() << endl;
 
 		bundle->setNextHopEid(bestRoute->nextHop);
-		sdr_->enqueueBundleToContact(bundle, bestRoute->hops.at(0)->getId());
+		sdr_->enqueueBundleToNode(bundle, bestRoute->hops.at(0)->getDestinationEid());
 	} else {
 		// Enqueue to limbo
 		bundle->setNextHopEid(bestRoute->nextHop);
-		sdr_->enqueueBundleToContact(bundle, 0);
+		sdr_->enqueueBundleToNode(bundle, 0);
 
 		cout << "!*BestRoute not found (enqueing to limbo)" << endl;
 	}

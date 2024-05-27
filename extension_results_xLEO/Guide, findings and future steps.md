@@ -75,7 +75,7 @@ New results with cgrModel350 and 33 LEOs (half of all available LEOs) which seem
 Show that the issue came from cgrModelRev17, because now with CGRmodel350 all is fine.
 
 ## RunTest5 (Influence of SDR size in HAGS)
-
+We cleary see that having a
 
 ## RunTest6 (Influence of ISL)
 
@@ -85,6 +85,7 @@ Show that the issue came from cgrModelRev17, because now with CGRmodel350 all is
 ## Agenda
 - We need to address the issue of a slow start to a simulation, especially as we increase the number of LEOs.
 - We need to test with different SDR size in HAGS and GS to see the congestion and how CGR deals with it.
+- Compare the in
 
 
 ### SDR size test

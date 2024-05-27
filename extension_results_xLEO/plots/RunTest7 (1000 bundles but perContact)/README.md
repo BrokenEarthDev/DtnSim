@@ -1,0 +1,1 @@
+Results for 1000 bundles but the opportunistic Rev17 was with perContact routing, which explains why there is a threshold reached. See RunTest8 to see an apples to apples comparison. 

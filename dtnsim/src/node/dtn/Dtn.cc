@@ -166,6 +166,11 @@ void Dtn::initialize(int stage)
 			ContactPlan *globalContactPlan = ((Dtn*) this->getParentModule()->getParentModule()->getSubmodule("node", 0)->getSubmodule("dtn"))->getContactPlanPointer();
 			routing = new RoutingCgrModelRev17(eid_, this->getParentModule()->getVectorSize(), &sdr_, &contactPlan_, globalContactPlan, par("routingType"), par("printRoutingDebug"));
 		}
+		else if (routeString.compare("cgrModelRev17Distribution") == 0)
+		{
+			ContactPlan *globalContactPlan = ((Dtn*) this->getParentModule()->getParentModule()->getSubmodule("node", 0)->getSubmodule("dtn"))->getContactPlanPointer();
+			routing = new RoutingCgrModelRev17Distribution(eid_, this->getParentModule()->getVectorSize(), &sdr_, &contactPlan_, globalContactPlan, par("routingType"), par("printRoutingDebug"), par("numHags"), par("MeanTTF"), par("MeanTTR"));
+		}
 		else if (routeString.compare("epidemic") == 0)
 		{
 			routing = new RoutingEpidemic(eid_, &sdr_, this);
@@ -461,14 +466,26 @@ void Dtn::handleMessage(cMessage *msg)
 		forwardingMsgs_[forwardingMsgStart->getContactId()] = forwardingMsgStart;
 
 		// if there are messages in the queue for this contact
-		if (sdr_.isBundleForContact(contactId))
+		if ((sdr_.isBundleForNode(contactId)) || (sdr_.isBundleForContact(contactId)))
 		{
 			// If local/remote node are responsive, then transmit bundle
 			Dtn *neighborDtn = check_and_cast<Dtn*>(this->getParentModule()->getParentModule()->getSubmodule("node", neighborEid)->getSubmodule("dtn"));
 			if ((!neighborDtn->onFault) && (!this->onFault))
 			{
 				// Get bundle pointer from sdr
-				BundlePkt *bundle = sdr_.getNextBundleForContact(contactId);
+				string routingType_ = par("routingType");
+				BundlePkt *bundle;
+				if (routingType_.find("sdrModel:perNode") != std::string::npos) {
+					bundle = sdr_.getNextBundleForNode(contactId);
+				} else {
+					bundle = sdr_.getNextBundleForContact(contactId);
+				}
+
+				// Check if bundle is NULL before using it
+				if (bundle == NULL) {
+					cout << "No bundle available for contactId: " << contactId << endl;
+					return; // or handle this situation differently
+				}
 
 				// Calculate data rate and Tx duration
 				double dataRate = contactTopology_.getContactById(contactId)->getDataRate();
@@ -492,7 +509,12 @@ void Dtn::handleMessage(cMessage *msg)
 					if (saveBundleMap_)
 						bundleMap_ << simTime() << "," << eid_ << "," << neighborEid << "," << bundle->getSourceEid() << "," << bundle->getDestinationEid() << "," << bundle->getBitLength() << "," << txDuration << endl;
 
-					sdr_.popNextBundleForContact(contactId);
+					string routingType_ = par("routingType");
+					if (routingType_.find("sdrModel:perNode") != std::string::npos) {
+						sdr_.popNextBundleForNode(contactId);
+					} else {
+						sdr_.popNextBundleForContact(contactId);
+					}
 
 					// If custody requested, store a copy of the bundle until report received
 					if (bundle->getCustodyTransferRequested())
@@ -637,6 +659,13 @@ void Dtn::dispatchBundle(BundlePkt *bundle)
 			emit(routeCgrRouteTableEntriesCreated, ((RoutingCgrModelRev17*) routing)->getRouteTableEntriesCreated());
 			emit(routeCgrRouteTableEntriesExplored, ((RoutingCgrModelRev17*) routing)->getRouteTableEntriesExplored());
 		}
+		if (routeString.compare("cgrModelRev17Distribution") == 0)
+		{
+			emit(routeCgrDijkstraCalls, ((RoutingCgrModelRev17Distribution*) routing)->getDijkstraCalls());
+			emit(routeCgrDijkstraLoops, ((RoutingCgrModelRev17Distribution*) routing)->getDijkstraLoops());
+			emit(routeCgrRouteTableEntriesCreated, ((RoutingCgrModelRev17Distribution*) routing)->getRouteTableEntriesCreated());
+			emit(routeCgrRouteTableEntriesExplored, ((RoutingCgrModelRev17Distribution*) routing)->getRouteTableEntriesExplored());
+		}
 		emit(sdrBundleStored, sdr_.getBundlesCountInSdr());
 		emit(sdrBytesStored, sdr_.getBytesStoredInSdr());
 
@@ -655,8 +684,12 @@ void Dtn::refreshForwarding()
 		ForwardingMsgStart *forwardingMsg = it->second;
 		int cid = forwardingMsg->getContactId();
 
-		if (!sdr_.isBundleForContact(cid))
+		if (!sdr_.isBundleForNode(cid))
 			//notify routing protocol that it has messages to send and contacts for routing
+			routing->refreshForwarding(contactTopology_.getContactById(cid));
+		
+		if (!sdr_.isBundleForNode(cid))
+						//notify routing protocol that it has messages to send and contacts for routing
 			routing->refreshForwarding(contactTopology_.getContactById(cid));
 
 		if (!forwardingMsg->isScheduled())
