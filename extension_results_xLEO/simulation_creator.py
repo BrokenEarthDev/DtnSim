@@ -92,13 +92,14 @@ number_of_GS_wanted = []
 number_of_HAGS_GS_wanted = [5]
 number_of_repetitions = 20
 number_of_random_failures = 11
+cycle_source = 5
 SDR = 0
 TTR, TTF = [], []
 
 
 # Specific parameters
-number_of_bundles = 500
-name = 'weighted'
+number_of_bundles = 1000
+name = 'opportunistic'
 distribution = 'weighted'  # 'equal', 'randomWeighted', 'weighted' or 'opportunistic'
 
 if distribution == 'equal':
@@ -155,7 +156,7 @@ elif distribution == 'weighted':
         TTRinString += [ttrInString[:-1] ]
         TTFinString += [ttfInString[:-1]]
 
-    # print(TTRinString, TTFinString)
+    # print(TTFinString)
 
 # Find the first key that have a value that began with 'LEO'
 first_LEO = 1
@@ -173,13 +174,13 @@ if distribution == 'equal':
 
         for number_of_GS in number_of_GS_wanted:
             GST_IDS_to_keep = [2 + 2*i for i in range(number_of_GS)]
-            output_file = 'dtnsim/simulations/HAPS_Analysis/FilteredContactPlans/contact_plan_7d_node-ids_%sLEO_%sGS_%sSDR.txt' % (number_of_LEOS, number_of_GS, SDR)
+            output_file = 'dtnsim/simulations/HAPS_Analysis/FilteredContactPlans/contact_plan_7d_node-ids_%sLEO_%sGS.txt' % (number_of_LEOS, number_of_GS)
             contact_filterer(input_file, output_file, LEO_IDS_to_keep, GST_IDS_to_keep, [])
 
         for number_of_HAGS_GS in number_of_HAGS_GS_wanted:
             GST_IDS_to_keep = [2 + 2*i for i in range(number_of_HAGS_GS)]
             HAPS_IDS_to_keep = [3 + 2*i for i in range(number_of_HAGS_GS)]
-            output_file = 'dtnsim/simulations/HAPS_Analysis/FilteredContactPlans/contact_plan_7d_node-ids_%sLEO_%sHAP_%sGS_EQ.txt' % (number_of_LEOS, number_of_HAGS_GS, number_of_HAGS_GS)
+            output_file = 'dtnsim/simulations/HAPS_Analysis/FilteredContactPlans/contact_plan_7d_node-ids_%sLEO_%sHAP_%sGS.txt' % (number_of_LEOS, number_of_HAGS_GS, number_of_HAGS_GS)
             contact_filterer(input_file, output_file, LEO_IDS_to_keep, GST_IDS_to_keep, HAPS_IDS_to_keep)
 
 elif distribution == 'weighted' or distribution == 'randomWeighted':
@@ -194,7 +195,7 @@ elif distribution == 'weighted' or distribution == 'randomWeighted':
 
                 for number_of_GS in number_of_GS_wanted:
                     GST_IDS_to_keep = [2 + 2*i for i in range(number_of_GS)]
-                    output_file = 'dtnsim/simulations/HAPS_Analysis/FilteredContactPlans/contact_plan_7d_node-ids_%sLEO_%sGS_%sSDR_TTR_%s_TTF_%s.txt' % (number_of_LEOS, number_of_GS, SDR, TTRinString[i], TTFinString[i])
+                    output_file = 'dtnsim/simulations/HAPS_Analysis/FilteredContactPlans/contact_plan_7d_node-ids_%sLEO_%sGS.txt' % (number_of_LEOS, number_of_GS)
                     p = multiprocessing.Process(target=process_filtering, args=(input_file, output_file, LEO_IDS_to_keep, GST_IDS_to_keep, []))
                     processes.append(p)
                     p.start()
@@ -202,7 +203,8 @@ elif distribution == 'weighted' or distribution == 'randomWeighted':
                 for number_of_HAGS_GS in number_of_HAGS_GS_wanted:
                     GST_IDS_to_keep = [2 + 2*i for i in range(number_of_HAGS_GS)]
                     HAPS_IDS_to_keep = [3 + 2*i for i in range(number_of_HAGS_GS)]
-                    output_file = 'dtnsim/simulations/HAPS_Analysis/FilteredContactPlans/contact_plan_7d_node-ids_%sLEO_%sHAP_%sGS_TTR_%s_TTF_%s_%s.txt' % (number_of_LEOS, number_of_HAGS_GS, number_of_HAGS_GS, TTRinString[i], TTFinString[i], name)
+                    # output_file = 'dtnsim/simulations/HAPS_Analysis/FilteredContactPlans/contact_plan_7d_node-ids_%sLEO_%sHAP_%sGS_TTR_%s_TTF_%s_%s.txt' % (number_of_LEOS, number_of_HAGS_GS, number_of_HAGS_GS, TTRinString[i], TTFinString[i], name)
+                    output_file = 'dtnsim/simulations/HAPS_Analysis/FilteredContactPlans/contact_plan_7d_node-ids_paper'
                     p = multiprocessing.Process(target=process_filtering, args=(input_file, output_file, LEO_IDS_to_keep, GST_IDS_to_keep, HAPS_IDS_to_keep))
                     processes.append(p)
                     p.start()
@@ -244,7 +246,7 @@ if distribution == 'equal':
                 num_hags = output_file_name[hags_match-2] + output_file_name[hags_match-1] if output_file_name[hags_match-2].isdigit() else output_file_name[hags_match-1]
                 file.write("dtnsim.node[*].dtn.numHags = %s\n" % num_hags)
 
-            file.write("dtnsim.node[*].dtn.routingType = \"routeListType:allPaths-firstDepleted,volumeAware:allContacts,extensionBlock:on,contactPlan:global,distribution:weighted,sdrModel:perNode\"\n")
+            file.write("dtnsim.node[*].dtn.routingType = \"routeListType:allPaths-firstDepleted,volumeAware:allContacts,extensionBlock:on,contactPlan:local,distribution:weighted,sdrModel:perNode\"\n")
             file.write("#dtnsim.node[*].dtn.printRoutingDebug=true\n")
             file.write("\n")
             file.write("dtnsim.central.contactsFile = \"../FilteredContactPlans/contact_plan_7d_node-ids_%s.txt\"\n" % (output_file_name))
@@ -282,12 +284,13 @@ if distribution == 'equal':
             file.write("\n".join([f"dtnsim.node[{i}].fault.enable = true" for i in range(2, 43, 2)]))
 
 elif distribution == 'weighted' or distribution == 'randomWeighted':
-    for i in range(number_of_random_failures):
-        for number_of_LEOS in number_of_LEOS_wanted:
-            for number_of_GS in number_of_GS_wanted:
-                FOLDERS_NAME.append('%sLEO_%sGS' % (number_of_LEOS, number_of_GS))
-            for number_of_HAGS_GS in number_of_HAGS_GS_wanted:
-                FOLDERS_NAME.append('%sLEO_%sHAP_%sGS_TTR_%s_TTF_%s_%s' % (number_of_LEOS, number_of_HAGS_GS, number_of_HAGS_GS, TTRinString[i], TTFinString[i], name))
+    for source in range(cycle_source):
+        for i in range(number_of_random_failures):
+            for number_of_LEOS in number_of_LEOS_wanted:
+                for number_of_GS in number_of_GS_wanted:
+                    FOLDERS_NAME.append('%sLEO_%sGS' % (number_of_LEOS, number_of_GS))
+                for number_of_HAGS_GS in number_of_HAGS_GS_wanted:
+                    FOLDERS_NAME.append('source=%s_%s_%sLEO_%sHAP_%sGS_TTF_%s' % (str(44+source), name, number_of_LEOS, number_of_HAGS_GS, number_of_HAGS_GS, TTFinString[i]))
 
     i = 0
     # Write the omnetpp.ini file
@@ -311,28 +314,31 @@ elif distribution == 'weighted' or distribution == 'randomWeighted':
             hags_match = output_file_name.find("HAP")
             num_hags = output_file_name[hags_match-2] + output_file_name[hags_match-1] if output_file_name[hags_match-2].isdigit() else output_file_name[hags_match-1]
             file.write("dtnsim.node[*].dtn.numHags = %s\n" % num_hags)
-            file.write("dtnsim.node[*].dtn.MeanTTF = \"%s\"\n" % TTFinString[i])
-            file.write("dtnsim.node[*].dtn.MeanTTR = \"%s\"\n" % TTRinString[i])
+            ttf_index = output_file_name.find("TTF_")
+            ttf_string = output_file_name[ttf_index + 4:]
+            file.write("dtnsim.node[*].dtn.MeanTTF = \"%s\"\n" % ttf_string)
+            file.write("dtnsim.node[*].dtn.MeanTTR = \"%s\"\n" % TTRinString[0])
 
-            file.write("dtnsim.node[*].dtn.routingType = \"routeListType:allPaths-firstDepleted,volumeAware:allContacts,extensionBlock:on,contactPlan:global,distribution:equal,sdrModel:perNode\"\n")
+            file.write("dtnsim.node[*].dtn.routingType = \"routeListType:allPaths-firstDepleted,volumeAware:allContacts,extensionBlock:on,contactPlan:local,distribution:%s,sdrModel:perNode\"\n" % name)
             file.write("#dtnsim.node[*].dtn.printRoutingDebug=true\n")
             file.write("\n")
-            file.write("dtnsim.central.contactsFile = \"../FilteredContactPlans/contact_plan_7d_node-ids_%s.txt\"\n" % (output_file_name))
+            file.write("dtnsim.central.contactsFile = \"../FilteredContactPlans/contact_plan_7d_node-ids_paper.txt\" \n")
 
-            file.write('dtnsim.node[44].app.enable=true\n')
-            file.write('dtnsim.node[44].app.bundlesNumber="%s"\n' % number_of_bundles)
-            file.write('dtnsim.node[44].app.start="0"\n')
-            file.write('dtnsim.node[44].app.destinationEid="1"\n')
-            file.write('dtnsim.node[44].app.size="100"\n')
+            file.write('dtnsim.node[%s].app.enable=true\n' % output_file_name[7:9])
+            file.write('dtnsim.node[%s].app.bundlesNumber="%s"\n' % (output_file_name[7:9], number_of_bundles))
+            file.write('dtnsim.node[%s].app.start="0"\n' % output_file_name[7:9])
+            file.write('dtnsim.node[%s].app.destinationEid="1"\n' % output_file_name[7:9])
+            file.write('dtnsim.node[%s].app.size="100"\n' % output_file_name[7:9])
 
             file.write("\n")
             file.write("# Nodes's failure rates\n")
-            for j in range(len(TTF[i])):
+            ttf_string_tab = ttf_string.split('_')
+            for j in range(5):
                 file.write("dtnsim.node[%s].fault.faultSeed = ${repetition}*100\n" % str(j*2+2))
-                file.write("dtnsim.node[%s].fault.meanTTF = %sh\n" % (j*2+2, TTF[i][j]))
-                file.write("dtnsim.node[%s].fault.meanTTR = %sh\n" % (j*2+2, TTR[i][j]))
+                file.write("dtnsim.node[%s].fault.meanTTF = %sh\n" % (j*2+2, ttf_string_tab[j]))
+                file.write("dtnsim.node[%s].fault.meanTTR = %sh\n" % (j*2+2, TTR[0][0]))
             file.write("\n")
-            file.write("\n".join([f"dtnsim.node[{i}].fault.enable = true" for i in range(2, 2*len(TTF[i])+2, 2)]))
+            file.write("\n".join([f"dtnsim.node[{i}].fault.enable = true" for i in range(2, 2*5+2, 2)]))
         i+=1
 
 # Create the script.sh file
@@ -340,7 +346,7 @@ for output_file_name in FOLDERS_NAME:
     with open('dtnsim/simulations/HAPS_Analysis/' + output_file_name + '/script.sh', 'w') as file:
         file.write("#!/bin/bash\n")
         file.write("\n")
-        file.write("opp_runall -j6 ../../../dtnsim omnetpp.ini -n ../../../src -u Cmdenv -c General\n")
+        file.write("opp_runall -b1 -j1 ../../../dtnsim omnetpp.ini -n ../../../src -u Cmdenv -c General \n")
         file.write("\n")
         file.write(": <<'END'\n")
         file.write("END\n")
@@ -369,7 +375,7 @@ if distribution == 'equal':
 
 elif distribution == 'weighted' or distribution == 'randomWeighted':
     i = 0
-    nbFiles = (len(number_of_GS_wanted) + len(number_of_HAGS_GS_wanted))*number_of_random_failures
+    nbFiles = (len(number_of_GS_wanted) + len(number_of_HAGS_GS_wanted))*number_of_random_failures*cycle_source
     for output_file_name in FOLDERS_NAME:
         if i % nbFiles == 0:
             with open('dtnsim/simulations/HAPS_Analysis/run%sLEOS.sh' % number_of_LEOS_wanted[i//nbFiles], 'w') as file:

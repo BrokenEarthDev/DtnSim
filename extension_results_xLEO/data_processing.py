@@ -106,14 +106,14 @@ def get_buffer_occupancy(INPUT_PATH, scenarios, xs, repetitions, nodes):
                 cur.execute(query_avg)
                 rows1 = cur.fetchall()
                 value_avg = 0 if (rows1[0]["result"] == None) else rows1[0]["result"]
-                values_avg.append(value_avg/value_total_packets * 100)
+                values_avg.append(value_avg)
 
                 query_max = "SELECT AVG(scalarValue) AS result FROM scalar WHERE scalarName='%s'" % "sdrBundleStored:max"
                 query_max += f" AND moduleName IN ({nodes_str})"
                 cur.execute(query_max)
                 rows2 = cur.fetchall()
                 value_max = 0 if (rows2[0]["result"] == None) else rows2[0]["result"]
-                values_max.append(value_max/value_total_packets * 100)
+                values_max.append(value_max)
 
         results[scenario] = (xss, values_avg, values_max)
     return results
@@ -125,7 +125,7 @@ def get_buffer_occupancy(INPUT_PATH, scenarios, xs, repetitions, nodes):
 number_of_LEOS_wanted = [5]
 number_of_GS_wanted = []
 number_of_HAGS_GS_wanted = [5]
-number_of_repetitions = 100
+number_of_repetitions = 500
 # TTR = [5,25]
 # TTF = [0.1,0.2,0.5,1,2,5,10,15,20,25,30,35,40]
 
@@ -159,10 +159,13 @@ for leos in number_of_LEOS_wanted:
             if folder[0] + folder[1] == str(leos):
                 scenarios.append('/' + folder + '/results/')
                 simulationName.append(folder)
-        else:
-            if folder[0] == str(leos) and not folder[1].isdigit():
+        elif folder[0] == str(leos) and not folder[1].isdigit():
                 scenarios.append('/' + folder + '/results/')
                 simulationName.append(folder)
+        elif folder[0] == "s":
+            scenarios.append('/' + folder + '/results/')
+            simulationName.append(folder)
+            
     # scenarios = []
     # simulationName = []
     # for number_of_LEOS in number_of_LEOS_wanted:

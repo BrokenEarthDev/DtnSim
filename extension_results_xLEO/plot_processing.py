@@ -17,7 +17,7 @@ matplotlib.use('Agg')
 number_of_LEOS_wanted = [5]
 number_of_GS_wanted = []
 number_of_HAGS_GS_wanted = [5]
-number_of_repetitions = 20
+number_of_repetitions = 500
 # TTR = [5, 25]
 # TTF = [0.1,0.2,0.5,1,2,5,10,15,20,25,30,35,40]
 number_of_random_failures = 11
@@ -292,17 +292,22 @@ for type in typeOfScenario:
     resultsBOAvg = []
     resultsBOMax = []
     for i in range(number_of_random_failures):
-        li.append("5LEO_5HAP_5GS_TTR_%s_TTF_%s_%s" % (TTRinString[i], TTFinString[i], type))
+        li.append('source=44_%s_5LEO_5HAP_5GS_TTF_%s' % (type, TTFinString[i]))
+
 
     with open('./extension_results_xLEO/data_json/results_LEO=5_TTR=25.json', 'r') as json_file:
         data = json.load(json_file)
     
-    for scenario in li:
-        resultsDR.append(data['delivery_ratio'][scenario])
-        resultsDD.append(data['delivery_delay'][scenario])
-        resultsBOAvg.append(data['buffer_occupancy_avg'][scenario])
-        resultsBOMax.append(data['buffer_occupancy_max'][scenario])
-
+    # for i in range(0,len(li),5):
+    #     resultsDR.append(data['delivery_ratio'][li[i]] + data['delivery_ratio'][li[i+1]] + data['delivery_ratio'][li[i+2]] + data['delivery_ratio'][li[i+3]] + data['delivery_ratio'][li[i+4]])
+    #     resultsDD.append(data['delivery_delay'][li[i]] + data['delivery_delay'][li[i+1]] + data['delivery_delay'][li[i+2]] + data['delivery_delay'][li[i+3]] + data['delivery_delay'][li[i+4]])
+    #     resultsBOAvg.append(data['buffer_occupancy_avg'][li[i]] + data['buffer_occupancy_avg'][li[i+1]] + data['buffer_occupancy_avg'][li[i+2]] + data['buffer_occupancy_avg'][li[i+3]] + data['buffer_occupancy_avg'][li[i+4]])
+    #     resultsBOMax.append(data['buffer_occupancy_max'][li[i]] + data['buffer_occupancy_max'][li[i+1]] + data['buffer_occupancy_max'][li[i+2]] + data['buffer_occupancy_max'][li[i+3]] + data['buffer_occupancy_max'][li[i+4]])
+    for scenarios in li:
+        resultsDR.append(data['delivery_ratio'][scenarios])
+        resultsDD.append(data['delivery_delay'][scenarios])
+        resultsBOAvg.append(data['buffer_occupancy_avg'][scenarios])
+        resultsBOMax.append(data['buffer_occupancy_max'][scenarios])
 
     AVG_DR = []
     STD_DR = []
@@ -348,12 +353,12 @@ for i in range(3):
     std_DR_arr = np.array(std_DR[i])
     ax.fill_between(x_values[i], avg_DR_arr - std_DR_arr, avg_DR_arr + std_DR_arr, color=clr[i], alpha=0.3)
  
-ax.set_xlabel("Max deviation from average", fontsize=13)
+ax.set_xlabel("Max deviation of TCC from 1.05h", fontsize=13)
 ax.set_ylabel("Delivery ratio [% of files generated]", fontsize=13)
 plt.tight_layout()
 plt.grid(linewidth=LINEWIDTH, zorder=0)
 ax.legend(loc='lower right', prop={'size': 10})
-plt.savefig("extension_results_xLEO/plots/delivery_ratio_V5.pdf")
+plt.savefig("extension_results_xLEO/plots/delivery_ratio_V9.pdf")
 plt.cla()
 plt.clf()
 
@@ -365,12 +370,12 @@ for i in range(3):
     std_DD_arr = np.array(std_DD[i])
     ax.fill_between(x_values[i], avg_DD_arr - std_DD_arr, avg_DD_arr + std_DD_arr, color=clr[i], alpha=0.3)
  
-ax.set_xlabel("Max deviation from average", fontsize=13)
+ax.set_xlabel("Max deviation of TCC from 1.05h", fontsize=13)
 ax.set_ylabel("Delivery Delay [hours]", fontsize=13)
 plt.tight_layout()
 plt.grid(linewidth=LINEWIDTH, zorder=0)
 ax.legend(loc='lower right', prop={'size': 10})
-plt.savefig("extension_results_xLEO/plots/delivery_delay_V5.pdf")
+plt.savefig("extension_results_xLEO/plots/delivery_delay_V9.pdf")
 plt.cla()
 plt.clf()
 
@@ -381,12 +386,12 @@ for i in range(3):
     std_avg_BO_arr = np.array(std_avg_BO[i])
     ax.fill_between(x_values[i], avg_avg_BO_arr - std_avg_BO_arr, avg_avg_BO_arr + std_avg_BO_arr, color=clr[i], alpha=0.3)
  
-ax.set_xlabel("Max deviation from average", fontsize=13)
+ax.set_xlabel("Max deviation of TCC from 1.05h", fontsize=13)
 ax.set_ylabel("Average Time In A Buffer [hours]", fontsize=13)
 plt.tight_layout()
 plt.grid(linewidth=LINEWIDTH, zorder=0)
 ax.legend(loc='upper left', prop={'size': 10})
-plt.savefig("extension_results_xLEO/plots/BufferOccupency_V5.pdf")
+plt.savefig("extension_results_xLEO/plots/BufferOccupency_V9.pdf")
 plt.cla()
 plt.clf()
 
@@ -398,12 +403,12 @@ for i in range(3):
     std_BO_arr = np.array(std_max_BO[i])
     ax.fill_between(x_values[i], avg_BO_arr - std_BO_arr, avg_BO_arr + std_BO_arr, color=clr[i], alpha=0.3)
  
-ax.set_xlabel("Max deviation from average", fontsize=13)
+ax.set_xlabel("Max deviation of TCC from 1.05h", fontsize=13)
 ax.set_ylabel("Buffer Max Occupency", fontsize=13)
 plt.tight_layout()
 plt.grid(linewidth=LINEWIDTH, zorder=0)
 ax.legend(loc='upper left', prop={'size': 10})
-plt.savefig("extension_results_xLEO/plots/MaxBufferOccupency_V5.pdf")
+plt.savefig("extension_results_xLEO/plots/MaxBufferOccupency_V9.pdf")
 plt.cla()
 plt.clf()
 

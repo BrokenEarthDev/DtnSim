@@ -20,7 +20,10 @@ void Fault::initialize()
 		meanTTR = this->par("meanTTR").doubleValue();
 
 		cMessage *faultMsg = new ContactMsg("fault", FAULT_START_TIMER);
-		scheduleAt(exponential(meanTTF), faultMsg);
+		double expValue = exponential(meanTTF);
+		cout << "initializing fault at " << expValue << " seconds at node " << eid_ << "\n";
+		scheduleAt(expValue, faultMsg);
+		// scheduleAt(exponential(meanTTF), faultMsg);
 	}
 }
 
@@ -34,7 +37,10 @@ void Fault::handleMessage(cMessage *msg)
 
 		// Schedule fault recovery
 		msg->setKind(FAULT_END_TIMER);
-		scheduleAt(simTime() + exponential(meanTTR), msg);
+		double expValue = exponential(meanTTR);
+		cout << "Recovery at " << simTime() + expValue << " seconds at node " << eid_ << "\n";
+		scheduleAt(simTime() + expValue, msg);
+		// scheduleAt(simTime() + exponential(meanTTR), msg);
 	}
 	else if (msg->getKind() == FAULT_END_TIMER)
 	{
@@ -44,6 +50,9 @@ void Fault::handleMessage(cMessage *msg)
 
 		// Schedule next fault
 		msg->setKind(FAULT_START_TIMER);
-		scheduleAt(simTime() + exponential(meanTTF), msg);
+		double expValue = exponential(meanTTF);
+		cout << "Next fault at " << simTime() + expValue << " seconds at node " << eid_ << "\n";
+		scheduleAt(simTime() + expValue, msg);
+		// scheduleAt(simTime() + exponential(meanTTF), msg);
 	}
 }

@@ -40,9 +40,9 @@ RoutingCgrModelRev17Distribution::RoutingCgrModelRev17Distribution(int eid, int 
 		}
 
 		// Print cloudCoverage
-		for (int i = 0; i < cloudCoverage.size(); i++) {
-			std::cout << "Cloud Coverage " << i << ": " << cloudCoverage[i] << "%" << std::endl;
-		}
+		// for (int i = 0; i < cloudCoverage.size(); i++) {
+		// 	std::cout << "Cloud Coverage " << i << ": " << cloudCoverage[i] << "%" << std::endl;
+		// }
 
 		// Compute the sum of cloudCoverage
 		double sum = std::accumulate(cloudCoverage.begin(), cloudCoverage.end(), 0.0);
@@ -54,9 +54,9 @@ RoutingCgrModelRev17Distribution::RoutingCgrModelRev17Distribution(int eid, int 
 		}
 
 		// Print distribution
-		for (int i = 0; i < distribution.size(); i++) {
-			std::cout << "DistributionBefore " << i << ": " << distribution[i] << "%" << endl;
-		}
+		// for (int i = 0; i < distribution.size(); i++) {
+		// 	std::cout << "DistributionBefore " << i << ": " << distribution[i] << "%" << endl;
+		// }
 
 		// Calculate the difference between the sum and 1
 		double diff = std::accumulate(distribution.begin(), distribution.end(), 0.0) - 100.0;
@@ -70,9 +70,9 @@ RoutingCgrModelRev17Distribution::RoutingCgrModelRev17Distribution(int eid, int 
 
 		
 		// Print distribution
-		for (int i = 0; i < distribution.size(); i++) {
-			std::cout << "DistributionAfter " << i << ": " << distribution[i] << "%" << endl;
-		}
+		// for (int i = 0; i < distribution.size(); i++) {
+		// 	std::cout << "DistributionAfter " << i << ": " << distribution[i] << "%" << endl;
+		// }
 
 		// Create the distribution vector by distributing the values accross the vector
 		int value = 3;
@@ -778,6 +778,7 @@ void RoutingCgrModelRev17Distribution::cgrForward(BundlePkt * bundle) {
 
 			// Select best route proportionally to the cloud coverage
 			int distributionIndex = bundle->getBundleId() % 100;
+			cout << distributionIndex << endl;
 			vector<CgrRoute>::iterator bestRoute = routeTable_.at(terminusNode).end();
 			for (auto it = routeTable_.at(terminusNode).begin(); it != routeTable_.at(terminusNode).end(); ++it) {
 				if (it->hops.size() >= 2 && it->hops[it->hops.size() - 2]->getSourceEid() == distributionVector[distributionIndex] && !it->filtered) {
