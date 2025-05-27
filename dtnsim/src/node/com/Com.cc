@@ -26,7 +26,8 @@ void Com::handleMessage(cMessage *msg)
 		if (eid_ == bundle->getNextHopEid())
 		{
 			// This is an inbound message, check if packet was lost on the way
-			if (packetLoss_ > uniform(0, 1.0))
+			cout << "Random place 5" << endl;
+			if (packetLoss_ != 0 && packetLoss_ > uniform(0, 1.0))
 			{
 				// Packet was lost in the way, delete it
 				cout << simTime() << " Node " << eid_ << " Bundle id " << bundle->getBundleId() << " lost on the way!" << endl;

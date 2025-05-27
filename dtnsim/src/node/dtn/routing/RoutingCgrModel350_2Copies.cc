@@ -1,7 +1,7 @@
 #include <src/node/dtn/Dtn.h>
 #include "RoutingCgrModel350_2Copies.h"
 
-RoutingCgrModel350_2Copies::RoutingCgrModel350_2Copies(int eid, SdrModel * sdr, ContactPlan * contactPlan, bool printDebug,cModule * dtn) :
+RoutingCgrModel350_2Copies::RoutingCgrModel350_2Copies(int eid, SdrModel * sdr, ContactPlan * contactPlan, bool printDebug, cModule * dtn) :
 		RoutingDeterministic(eid, sdr, contactPlan)
 {
 	printDebug_ = printDebug;

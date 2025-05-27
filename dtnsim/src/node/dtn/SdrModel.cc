@@ -141,6 +141,18 @@ int SdrModel::getBytesStoredToNeighbor(int eid)
 	return size;
 }
 
+int SdrModel::getNumberOfBundlesToNode(int eid) {
+	int count = 0;
+
+	map<int, list<BundlePkt*> >::iterator it = perNodeBundleQueue_.find(eid);
+	if (it != perNodeBundleQueue_.end()) {
+		count = it->second.size();
+	}
+
+	return count;
+}
+
+
 vector<int> SdrModel::getBundleSizesStoredToNeighbor(int eid)
 {
 	vector<int> sizes;
@@ -372,6 +384,7 @@ bool SdrModel::enqueueBundleToNode(BundlePkt *bundle, int nextNodeId)
     // int nextNodeId = contactPlan_->getContactById(contactId)->getDestinationEid();
 
     // if there is not enough space in sdr, the bundle is deleted
+	cout << "Node " << eid_ << " enqueueBundleToNode bundleId: " << bundle->getBundleId() << " nextNodeId: " << nextNodeId << endl;
     if (!(this->isSdrFreeSpace(bundle->getByteLength())))
     {
         delete bundle;
@@ -403,8 +416,7 @@ bool SdrModel::enqueueBundleToNode(BundlePkt *bundle, int nextNodeId)
     return true;
 }
 
-bool SdrModel::isBundleForNode(int contactId) {
-    int nextNodeId =  contactPlan_->getContactById(contactId)->getDestinationEid();
+bool SdrModel::isBundleForNode(int nextNodeId) {
 
 	map<int, list<BundlePkt*> >::iterator it = perNodeBundleQueue_.find(nextNodeId);
 
@@ -422,8 +434,7 @@ bool SdrModel::isBundleForNode(int contactId) {
 	}
 }
 
-BundlePkt* SdrModel::getNextBundleForNode(int contactId) {
-	int nextNodeId =  contactPlan_->getContactById(contactId)->getDestinationEid();
+BundlePkt* SdrModel::getNextBundleForNode(int nextNodeId) {
 	// cout << "NEXT NODE ID: " << nextNodeId << endl;
 	map<int, list<BundlePkt*> >::iterator it = perNodeBundleQueue_.find(nextNodeId);
 
@@ -439,8 +450,7 @@ BundlePkt* SdrModel::getNextBundleForNode(int contactId) {
 	return bundlesToTx.front();
 }
 
-void SdrModel::popNextBundleForNode(int contactId) {
-	int nextNodeId =  contactPlan_->getContactById(contactId)->getDestinationEid();
+void SdrModel::popNextBundleForNode(int nextNodeId) {
 	map<int, list<BundlePkt*> >::iterator it = perNodeBundleQueue_.find(nextNodeId);
 	// cout << "§§§§§ Node " << eid_ << " popNextBundleForNode nodeId: " << nextNodeId << endl;
 	list<BundlePkt*> bundlesToTx = it->second;
@@ -512,6 +522,8 @@ BundlePkt* SdrModel::getEnqueuedBundle(long bundleId)
 
 	return NULL;
 }
+
+
 
 /////////////////////////////////////
 // Enqueue and dequeue from transmittedBundlesInCustody_

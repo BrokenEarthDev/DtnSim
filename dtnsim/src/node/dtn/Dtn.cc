@@ -171,6 +171,11 @@ void Dtn::initialize(int stage)
 			ContactPlan *globalContactPlan = ((Dtn*) this->getParentModule()->getParentModule()->getSubmodule("node", 0)->getSubmodule("dtn"))->getContactPlanPointer();
 			routing = new RoutingCgrModelRev17Distribution(eid_, this->getParentModule()->getVectorSize(), &sdr_, &contactPlan_, globalContactPlan, par("routingType"), par("printRoutingDebug"), par("numHags"), par("MeanTTF"), par("MeanTTR"));
 		}
+		else if (routeString.compare("MarkovRouting") == 0)
+		{
+			routing = new MarkovRouting(eid_, &sdr_, &contactPlan_, par("numberBundles"), this, par("MeanTTF"), par("MeanTTR"));
+		}
+
 		else if (routeString.compare("epidemic") == 0)
 		{
 			routing = new RoutingEpidemic(eid_, &sdr_, this);
@@ -356,7 +361,9 @@ void Dtn::handleMessage(cMessage *msg)
 		if (msg->arrivedOn("gateToCom$i"))
 			emit(dtnBundleReceivedFromCom, true);
 		if (msg->arrivedOn("gateToApp$i"))
+			check_and_cast<App *>(this->getParentModule()->getParentModule()->getSubmodule("node", this->eid_)->getSubmodule("app"))->numberOfBundlesScheduledThisTime -= 1;
 			emit(dtnBundleReceivedFromApp, true);
+
 
 		BundlePkt *bundle = check_and_cast<BundlePkt*>(msg);
 		dispatchBundle(bundle);
@@ -465,8 +472,21 @@ void Dtn::handleMessage(cMessage *msg)
 		// save freeChannelMsg to cancel event if necessary
 		forwardingMsgs_[forwardingMsgStart->getContactId()] = forwardingMsgStart;
 
+		// if (sdr_.isBundleInKeep()){
+		// 	MarkovRouting* markovRouting = dynamic_cast<MarkovRouting*>(routing);
+		// 	cout << "Hi guys, this is happening because last time the bundle was not sent" << endl;
+		// 	BundlePkt *bundle = sdr_.getNextBundleForNode(this->eid_);
+		// 	if (bundle != nullptr) {
+		// 		sdr_.popNextBundleForNode(this->eid_);
+		// 		// Process the bundle here
+		// 		// ...
+		// 	}
+		// 	markovRouting->routeAndQueueBundle(sdr_.getNextBundleForNode(this->eid_), simTime().dbl());
+		// }
+
 		// if there are messages in the queue for this contact
-		if ((sdr_.isBundleForNode(contactId)) || (sdr_.isBundleForContact(contactId)))
+		int nextNodeId =  contactPlan_.getContactById(contactId)->getDestinationEid();
+		if ((sdr_.isBundleForNode(nextNodeId)) || (sdr_.isBundleForContact(contactId)))
 		{
 			// If local/remote node are responsive, then transmit bundle
 			Dtn *neighborDtn = check_and_cast<Dtn*>(this->getParentModule()->getParentModule()->getSubmodule("node", neighborEid)->getSubmodule("dtn"));
@@ -476,7 +496,8 @@ void Dtn::handleMessage(cMessage *msg)
 				string routingType_ = par("routingType");
 				BundlePkt *bundle;
 				if (routingType_.find("sdrModel:perNode") != std::string::npos) {
-					bundle = sdr_.getNextBundleForNode(contactId);
+					int nextNodeId =  contactPlan_.getContactById(contactId)->getDestinationEid();
+					bundle = sdr_.getNextBundleForNode(nextNodeId);
 				} else {
 					bundle = sdr_.getNextBundleForContact(contactId);
 				}
@@ -511,7 +532,8 @@ void Dtn::handleMessage(cMessage *msg)
 
 					string routingType_ = par("routingType");
 					if (routingType_.find("sdrModel:perNode") != std::string::npos) {
-						sdr_.popNextBundleForNode(contactId);
+						int nextNodeId =  contactPlan_.getContactById(contactId)->getDestinationEid();
+						sdr_.popNextBundleForNode(nextNodeId);
 					} else {
 						sdr_.popNextBundleForContact(contactId);
 					}
@@ -683,13 +705,10 @@ void Dtn::refreshForwarding()
 	{
 		ForwardingMsgStart *forwardingMsg = it->second;
 		int cid = forwardingMsg->getContactId();
+		int nextNodeId =  contactPlan_.getContactById(cid)->getDestinationEid();
 
-		if (!sdr_.isBundleForNode(cid))
+		if (!sdr_.isBundleForNode(nextNodeId))
 			//notify routing protocol that it has messages to send and contacts for routing
-			routing->refreshForwarding(contactTopology_.getContactById(cid));
-		
-		if (!sdr_.isBundleForNode(cid))
-						//notify routing protocol that it has messages to send and contacts for routing
 			routing->refreshForwarding(contactTopology_.getContactById(cid));
 
 		if (!forwardingMsg->isScheduled())

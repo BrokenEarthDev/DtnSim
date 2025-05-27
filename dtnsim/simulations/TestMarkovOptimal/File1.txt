@@ -1,0 +1,985 @@
+Starting...
+
+$ cd /home/benoitcoeugnet/git/dtnsim/dtnsim/simulations/HAPS_Analysis/WeightedWithoutCP
+$ ../../../dtnsim -m -n ../..:../../../src omnetpp.ini
+
+OMNeT++ Discrete Event Simulation  (C) 1992-2022 Andras Varga, OpenSim Ltd.
+Version: 6.0.3, build: 240223-17fcae5ef3, edition: Academic Public License -- NOT FOR COMMERCIAL USE
+See the license for distribution terms and warranty disclaimer
+
+Setting up Qtenv...
+
+Loading NED files from ../..:  0
+Loading NED files from ../../../src:  9
+
+Loading images from 'images': *: 0 
+Loading images from '/home/benoitcoeugnet/omnetpp-6.0.3/images': *: 0  abstract/*: 90  background/*: 4  block/*: 325  device/*: 195  logo/*: 3  maps/*: 9  misc/*: 70  msg/*: 55  old/*: 111  status/*: 28 
+
+QStandardPaths: wrong permissions on runtime directory /run/user/1000/, 0755 instead of 0700
+Use of the randomness
+With 300 initializing fault at 318.039 seconds at node 2
+Use of the randomness
+With 600 initializing fault at 138.042 seconds at node 4
+bundlesInSdr: 0
+delay: (omnetpp::cPar)delay true
+numberOfBundlesScheduledThisTime: 0
+Less than 2 bundles will be in Dtn this time
+bundleInSdr: 0 , simTime: 0  => Bundle sent
+bundlesInSdr: 0
+delay: (omnetpp::cPar)delay true
+numberOfBundlesScheduledThisTime: 1
+2 bundles already in Dtn or scheduled to be sent to dtn
+bundleInSdr: 0 , simTime: 0  => Bundle sent
+TIME: 0s, NODE: 6, routing bundle : 6-1 (100Bytes)
+Route: 6 -> 3 -> 2 -> 1
+Route: 6 -> 5 -> 4 -> 1
+28
+BID : 28, FT : 0, TT : 5000, AT : 0, NH : 3 // Chosen route: 6 -> 3 -> 2 -> 1
+*Best: routeTable[1][ ]: nextHop: 3, frm 0 to 5000, arrival time: 0, volume: 5000/5000Bytes
+*Rvol: routeTable[1][0]: updated to 4900Bytes (all contacts)
+queuing bundle in node 3(7)
+Node 6 enqueueBundleToNode bundleId: 28 nextNodeId: 3
+TIME: 0s, NODE: 6, routing bundle : 6-1 (100Bytes)
+Route: 6 -> 3 -> 2 -> 1
+Route: 6 -> 5 -> 4 -> 1
+29
+BID : 29, FT : 0, TT : 5000, AT : 0, NH : 5 // Chosen route: 6 -> 5 -> 4 -> 1
+*Best: routeTable[1][ ]: nextHop: 5, frm 0 to 5000, arrival time: 0, volume: 5000/5000Bytes
+*Rvol: routeTable[1][1]: updated to 4900Bytes (all contacts)
+queuing bundle in node 5(8)
+Node 6 enqueueBundleToNode bundleId: 29 nextNodeId: 5
+Random place 5
+TIME: 0s, NODE: 3, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][3]: nextHop: 3, frm 0 to 5000, arrival time: 0, volume: 4900/5000Bytes
+hops: (+0 +5000 6 3 4900/5000Bytes-local:5000/5000Bytes)(+0 +604800 3 2 604700/604800Bytes-local:604800/604800Bytes)(+0 +604800 2 1 604700/604800Bytes-local:604800/604800Bytes)
+Using EB Route in header. Next hop: 2
+*Best: routeTable[1][ ]: nextHop: 2, frm 0 to 5000, arrival time: 0, volume: 4900/5000Bytes
+queuing bundle in node 2(3)
+Node 3 enqueueBundleToNode bundleId: 28 nextNodeId: 2
+Random place 5
+TIME: 0s, NODE: 5, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][5]: nextHop: 5, frm 0 to 5000, arrival time: 0, volume: 4900/5000Bytes
+hops: (+0 +5000 6 5 4900/5000Bytes-local:5000/5000Bytes)(+0 +604800 5 4 604700/604800Bytes-local:604800/604800Bytes)(+0 +604800 4 1 604700/604800Bytes-local:604800/604800Bytes)
+Using EB Route in header. Next hop: 4
+*Best: routeTable[1][ ]: nextHop: 4, frm 0 to 5000, arrival time: 0, volume: 4900/5000Bytes
+queuing bundle in node 4(5)
+Node 5 enqueueBundleToNode bundleId: 29 nextNodeId: 4
+Random place 5
+TIME: 0s, NODE: 2, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][2]: nextHop: 2, frm 0 to 5000, arrival time: 0, volume: 4900/5000Bytes
+hops: (+0 +604800 3 2 604700/604800Bytes-local:604800/604800Bytes)(+0 +604800 2 1 604700/604800Bytes-local:604800/604800Bytes)
+Using EB Route in header. Next hop: 1
+*Best: routeTable[1][ ]: nextHop: 1, frm 0 to 5000, arrival time: 0, volume: 4900/5000Bytes
+queuing bundle in node 1(1)
+Node 2 enqueueBundleToNode bundleId: 28 nextNodeId: 1
+Random place 5
+TIME: 0s, NODE: 4, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][4]: nextHop: 4, frm 0 to 5000, arrival time: 0, volume: 4900/5000Bytes
+hops: (+0 +604800 5 4 604700/604800Bytes-local:604800/604800Bytes)(+0 +604800 4 1 604700/604800Bytes-local:604800/604800Bytes)
+Using EB Route in header. Next hop: 1
+*Best: routeTable[1][ ]: nextHop: 1, frm 0 to 5000, arrival time: 0, volume: 4900/5000Bytes
+queuing bundle in node 1(2)
+Node 4 enqueueBundleToNode bundleId: 29 nextNodeId: 1
+Random place 5
+Random place 5
+bundlesInSdr: 0
+delay: (omnetpp::cPar)delay true
+numberOfBundlesScheduledThisTime: 0
+Less than 2 bundles will be in Dtn this time
+bundleInSdr: 0 , simTime: 100  => Bundle sent
+bundlesInSdr: 0
+delay: (omnetpp::cPar)delay true
+numberOfBundlesScheduledThisTime: 1
+2 bundles already in Dtn or scheduled to be sent to dtn
+bundleInSdr: 0 , simTime: 100  => Bundle sent
+TIME: 100s, NODE: 6, routing bundle : 6-1 (100Bytes)
+Route: 6 -> 3 -> 2 -> 1
+Route: 6 -> 5 -> 4 -> 1
+36
+BID : 36, FT : 0, TT : 5000, AT : 0, NH : 3 // Chosen route: 6 -> 3 -> 2 -> 1
+*Best: routeTable[1][ ]: nextHop: 3, frm 0 to 5000, arrival time: 0, volume: 4900/5000Bytes
+*Rvol: routeTable[1][0]: updated to 4800Bytes (all contacts)
+queuing bundle in node 3(7)
+Node 6 enqueueBundleToNode bundleId: 36 nextNodeId: 3
+TIME: 100s, NODE: 6, routing bundle : 6-1 (100Bytes)
+Route: 6 -> 3 -> 2 -> 1
+Route: 6 -> 5 -> 4 -> 1
+37
+BID : 37, FT : 0, TT : 5000, AT : 0, NH : 5 // Chosen route: 6 -> 5 -> 4 -> 1
+*Best: routeTable[1][ ]: nextHop: 5, frm 0 to 5000, arrival time: 0, volume: 4900/5000Bytes
+*Rvol: routeTable[1][1]: updated to 4800Bytes (all contacts)
+queuing bundle in node 5(8)
+Node 6 enqueueBundleToNode bundleId: 37 nextNodeId: 5
+Random place 5
+TIME: 100s, NODE: 3, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][3]: nextHop: 3, frm 0 to 5000, arrival time: 0, volume: 4800/5000Bytes
+hops: (+0 +5000 6 3 4800/5000Bytes-local:5000/5000Bytes)(+0 +604800 3 2 604600/604800Bytes-local:604700/604800Bytes)(+0 +604800 2 1 604600/604800Bytes-local:604700/604800Bytes)
+Using EB Route in header. Next hop: 2
+*Best: routeTable[1][ ]: nextHop: 2, frm 0 to 5000, arrival time: 0, volume: 4800/5000Bytes
+queuing bundle in node 2(3)
+Node 3 enqueueBundleToNode bundleId: 36 nextNodeId: 2
+Random place 5
+TIME: 100s, NODE: 5, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][5]: nextHop: 5, frm 0 to 5000, arrival time: 0, volume: 4800/5000Bytes
+hops: (+0 +5000 6 5 4800/5000Bytes-local:5000/5000Bytes)(+0 +604800 5 4 604600/604800Bytes-local:604700/604800Bytes)(+0 +604800 4 1 604600/604800Bytes-local:604700/604800Bytes)
+Using EB Route in header. Next hop: 4
+*Best: routeTable[1][ ]: nextHop: 4, frm 0 to 5000, arrival time: 0, volume: 4800/5000Bytes
+queuing bundle in node 4(5)
+Node 5 enqueueBundleToNode bundleId: 37 nextNodeId: 4
+Random place 5
+TIME: 100s, NODE: 2, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][2]: nextHop: 2, frm 0 to 5000, arrival time: 0, volume: 4800/5000Bytes
+hops: (+0 +604800 3 2 604600/604800Bytes-local:604800/604800Bytes)(+0 +604800 2 1 604600/604800Bytes-local:604700/604800Bytes)
+Using EB Route in header. Next hop: 1
+*Best: routeTable[1][ ]: nextHop: 1, frm 0 to 5000, arrival time: 0, volume: 4800/5000Bytes
+queuing bundle in node 1(1)
+Node 2 enqueueBundleToNode bundleId: 36 nextNodeId: 1
+Random place 5
+TIME: 100s, NODE: 4, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][4]: nextHop: 4, frm 0 to 5000, arrival time: 0, volume: 4800/5000Bytes
+hops: (+0 +604800 5 4 604600/604800Bytes-local:604800/604800Bytes)(+0 +604800 4 1 604600/604800Bytes-local:604700/604800Bytes)
+Using EB Route in header. Next hop: 1
+*Best: routeTable[1][ ]: nextHop: 1, frm 0 to 5000, arrival time: 0, volume: 4800/5000Bytes
+queuing bundle in node 1(2)
+Node 4 enqueueBundleToNode bundleId: 37 nextNodeId: 1
+Random place 5
+Random place 5
+Use of the randomness
+With 300 Recovery at 174.694423893103 seconds at node 4
+Use of the randomness
+With 600 Next fault at 740.249005335266 seconds at node 4
+bundlesInSdr: 0
+delay: (omnetpp::cPar)delay true
+numberOfBundlesScheduledThisTime: 0
+Less than 2 bundles will be in Dtn this time
+bundleInSdr: 0 , simTime: 200  => Bundle sent
+bundlesInSdr: 0
+delay: (omnetpp::cPar)delay true
+numberOfBundlesScheduledThisTime: 1
+2 bundles already in Dtn or scheduled to be sent to dtn
+bundleInSdr: 0 , simTime: 200  => Bundle sent
+TIME: 200s, NODE: 6, routing bundle : 6-1 (100Bytes)
+Route: 6 -> 3 -> 2 -> 1
+Route: 6 -> 5 -> 4 -> 1
+44
+BID : 44, FT : 0, TT : 5000, AT : 0, NH : 3 // Chosen route: 6 -> 3 -> 2 -> 1
+*Best: routeTable[1][ ]: nextHop: 3, frm 0 to 5000, arrival time: 0, volume: 4800/5000Bytes
+*Rvol: routeTable[1][0]: updated to 4700Bytes (all contacts)
+queuing bundle in node 3(7)
+Node 6 enqueueBundleToNode bundleId: 44 nextNodeId: 3
+TIME: 200s, NODE: 6, routing bundle : 6-1 (100Bytes)
+Route: 6 -> 3 -> 2 -> 1
+Route: 6 -> 5 -> 4 -> 1
+45
+BID : 45, FT : 0, TT : 5000, AT : 0, NH : 5 // Chosen route: 6 -> 5 -> 4 -> 1
+*Best: routeTable[1][ ]: nextHop: 5, frm 0 to 5000, arrival time: 0, volume: 4800/5000Bytes
+*Rvol: routeTable[1][1]: updated to 4700Bytes (all contacts)
+queuing bundle in node 5(8)
+Node 6 enqueueBundleToNode bundleId: 45 nextNodeId: 5
+Random place 5
+TIME: 200s, NODE: 3, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][3]: nextHop: 3, frm 0 to 5000, arrival time: 0, volume: 4700/5000Bytes
+hops: (+0 +5000 6 3 4700/5000Bytes-local:5000/5000Bytes)(+0 +604800 3 2 604500/604800Bytes-local:604600/604800Bytes)(+0 +604800 2 1 604500/604800Bytes-local:604600/604800Bytes)
+Using EB Route in header. Next hop: 2
+*Best: routeTable[1][ ]: nextHop: 2, frm 0 to 5000, arrival time: 0, volume: 4700/5000Bytes
+queuing bundle in node 2(3)
+Node 3 enqueueBundleToNode bundleId: 44 nextNodeId: 2
+Random place 5
+TIME: 200s, NODE: 5, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][5]: nextHop: 5, frm 0 to 5000, arrival time: 0, volume: 4700/5000Bytes
+hops: (+0 +5000 6 5 4700/5000Bytes-local:5000/5000Bytes)(+0 +604800 5 4 604500/604800Bytes-local:604600/604800Bytes)(+0 +604800 4 1 604500/604800Bytes-local:604600/604800Bytes)
+Using EB Route in header. Next hop: 4
+*Best: routeTable[1][ ]: nextHop: 4, frm 0 to 5000, arrival time: 0, volume: 4700/5000Bytes
+queuing bundle in node 4(5)
+Node 5 enqueueBundleToNode bundleId: 45 nextNodeId: 4
+Random place 5
+TIME: 200s, NODE: 2, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][2]: nextHop: 2, frm 0 to 5000, arrival time: 0, volume: 4700/5000Bytes
+hops: (+0 +604800 3 2 604500/604800Bytes-local:604800/604800Bytes)(+0 +604800 2 1 604500/604800Bytes-local:604600/604800Bytes)
+Using EB Route in header. Next hop: 1
+*Best: routeTable[1][ ]: nextHop: 1, frm 0 to 5000, arrival time: 0, volume: 4700/5000Bytes
+queuing bundle in node 1(1)
+Node 2 enqueueBundleToNode bundleId: 44 nextNodeId: 1
+Random place 5
+TIME: 200s, NODE: 4, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][4]: nextHop: 4, frm 0 to 5000, arrival time: 0, volume: 4700/5000Bytes
+hops: (+0 +604800 5 4 604500/604800Bytes-local:604800/604800Bytes)(+0 +604800 4 1 604500/604800Bytes-local:604600/604800Bytes)
+Using EB Route in header. Next hop: 1
+*Best: routeTable[1][ ]: nextHop: 1, frm 0 to 5000, arrival time: 0, volume: 4700/5000Bytes
+queuing bundle in node 1(2)
+Node 4 enqueueBundleToNode bundleId: 45 nextNodeId: 1
+Random place 5
+Random place 5
+bundlesInSdr: 0
+delay: (omnetpp::cPar)delay true
+numberOfBundlesScheduledThisTime: 0
+Less than 2 bundles will be in Dtn this time
+bundleInSdr: 0 , simTime: 300  => Bundle sent
+bundlesInSdr: 0
+delay: (omnetpp::cPar)delay true
+numberOfBundlesScheduledThisTime: 1
+2 bundles already in Dtn or scheduled to be sent to dtn
+bundleInSdr: 0 , simTime: 300  => Bundle sent
+TIME: 300s, NODE: 6, routing bundle : 6-1 (100Bytes)
+Route: 6 -> 3 -> 2 -> 1
+Route: 6 -> 5 -> 4 -> 1
+52
+BID : 52, FT : 0, TT : 5000, AT : 0, NH : 3 // Chosen route: 6 -> 3 -> 2 -> 1
+*Best: routeTable[1][ ]: nextHop: 3, frm 0 to 5000, arrival time: 0, volume: 4700/5000Bytes
+*Rvol: routeTable[1][0]: updated to 4600Bytes (all contacts)
+queuing bundle in node 3(7)
+Node 6 enqueueBundleToNode bundleId: 52 nextNodeId: 3
+TIME: 300s, NODE: 6, routing bundle : 6-1 (100Bytes)
+Route: 6 -> 3 -> 2 -> 1
+Route: 6 -> 5 -> 4 -> 1
+53
+BID : 53, FT : 0, TT : 5000, AT : 0, NH : 5 // Chosen route: 6 -> 5 -> 4 -> 1
+*Best: routeTable[1][ ]: nextHop: 5, frm 0 to 5000, arrival time: 0, volume: 4700/5000Bytes
+*Rvol: routeTable[1][1]: updated to 4600Bytes (all contacts)
+queuing bundle in node 5(8)
+Node 6 enqueueBundleToNode bundleId: 53 nextNodeId: 5
+Random place 5
+TIME: 300s, NODE: 3, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][3]: nextHop: 3, frm 0 to 5000, arrival time: 0, volume: 4600/5000Bytes
+hops: (+0 +5000 6 3 4600/5000Bytes-local:5000/5000Bytes)(+0 +604800 3 2 604400/604800Bytes-local:604500/604800Bytes)(+0 +604800 2 1 604400/604800Bytes-local:604500/604800Bytes)
+Using EB Route in header. Next hop: 2
+*Best: routeTable[1][ ]: nextHop: 2, frm 0 to 5000, arrival time: 0, volume: 4600/5000Bytes
+queuing bundle in node 2(3)
+Node 3 enqueueBundleToNode bundleId: 52 nextNodeId: 2
+Random place 5
+TIME: 300s, NODE: 5, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][5]: nextHop: 5, frm 0 to 5000, arrival time: 0, volume: 4600/5000Bytes
+hops: (+0 +5000 6 5 4600/5000Bytes-local:5000/5000Bytes)(+0 +604800 5 4 604400/604800Bytes-local:604500/604800Bytes)(+0 +604800 4 1 604400/604800Bytes-local:604500/604800Bytes)
+Using EB Route in header. Next hop: 4
+*Best: routeTable[1][ ]: nextHop: 4, frm 0 to 5000, arrival time: 0, volume: 4600/5000Bytes
+queuing bundle in node 4(5)
+Node 5 enqueueBundleToNode bundleId: 53 nextNodeId: 4
+Random place 5
+TIME: 300s, NODE: 2, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][2]: nextHop: 2, frm 0 to 5000, arrival time: 0, volume: 4600/5000Bytes
+hops: (+0 +604800 3 2 604400/604800Bytes-local:604800/604800Bytes)(+0 +604800 2 1 604400/604800Bytes-local:604500/604800Bytes)
+Using EB Route in header. Next hop: 1
+*Best: routeTable[1][ ]: nextHop: 1, frm 0 to 5000, arrival time: 0, volume: 4600/5000Bytes
+queuing bundle in node 1(1)
+Node 2 enqueueBundleToNode bundleId: 52 nextNodeId: 1
+Random place 5
+TIME: 300s, NODE: 4, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][4]: nextHop: 4, frm 0 to 5000, arrival time: 0, volume: 4600/5000Bytes
+hops: (+0 +604800 5 4 604400/604800Bytes-local:604800/604800Bytes)(+0 +604800 4 1 604400/604800Bytes-local:604500/604800Bytes)
+Using EB Route in header. Next hop: 1
+*Best: routeTable[1][ ]: nextHop: 1, frm 0 to 5000, arrival time: 0, volume: 4600/5000Bytes
+queuing bundle in node 1(2)
+Node 4 enqueueBundleToNode bundleId: 53 nextNodeId: 1
+Random place 5
+Random place 5
+Use of the randomness
+With 300 Recovery at 1218.461038361925 seconds at node 2
+bundlesInSdr: 0
+delay: (omnetpp::cPar)delay true
+numberOfBundlesScheduledThisTime: 0
+Less than 2 bundles will be in Dtn this time
+bundleInSdr: 0 , simTime: 400  => Bundle sent
+bundlesInSdr: 0
+delay: (omnetpp::cPar)delay true
+numberOfBundlesScheduledThisTime: 1
+2 bundles already in Dtn or scheduled to be sent to dtn
+bundleInSdr: 0 , simTime: 400  => Bundle sent
+TIME: 400s, NODE: 6, routing bundle : 6-1 (100Bytes)
+Route: 6 -> 3 -> 2 -> 1
+Route: 6 -> 5 -> 4 -> 1
+60
+BID : 60, FT : 0, TT : 5000, AT : 0, NH : 3 // Chosen route: 6 -> 3 -> 2 -> 1
+*Best: routeTable[1][ ]: nextHop: 3, frm 0 to 5000, arrival time: 0, volume: 4600/5000Bytes
+*Rvol: routeTable[1][0]: updated to 4500Bytes (all contacts)
+queuing bundle in node 3(7)
+Node 6 enqueueBundleToNode bundleId: 60 nextNodeId: 3
+TIME: 400s, NODE: 6, routing bundle : 6-1 (100Bytes)
+Route: 6 -> 3 -> 2 -> 1
+Route: 6 -> 5 -> 4 -> 1
+61
+BID : 61, FT : 0, TT : 5000, AT : 0, NH : 5 // Chosen route: 6 -> 5 -> 4 -> 1
+*Best: routeTable[1][ ]: nextHop: 5, frm 0 to 5000, arrival time: 0, volume: 4600/5000Bytes
+*Rvol: routeTable[1][1]: updated to 4500Bytes (all contacts)
+queuing bundle in node 5(8)
+Node 6 enqueueBundleToNode bundleId: 61 nextNodeId: 5
+Random place 5
+TIME: 400s, NODE: 3, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][3]: nextHop: 3, frm 0 to 5000, arrival time: 0, volume: 4500/5000Bytes
+hops: (+0 +5000 6 3 4500/5000Bytes-local:5000/5000Bytes)(+0 +604800 3 2 604300/604800Bytes-local:604400/604800Bytes)(+0 +604800 2 1 604300/604800Bytes-local:604400/604800Bytes)
+Using EB Route in header. Next hop: 2
+*Best: routeTable[1][ ]: nextHop: 2, frm 0 to 5000, arrival time: 0, volume: 4500/5000Bytes
+queuing bundle in node 2(3)
+Node 3 enqueueBundleToNode bundleId: 60 nextNodeId: 2
+Random place 5
+TIME: 400s, NODE: 5, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][5]: nextHop: 5, frm 0 to 5000, arrival time: 0, volume: 4500/5000Bytes
+hops: (+0 +5000 6 5 4500/5000Bytes-local:5000/5000Bytes)(+0 +604800 5 4 604300/604800Bytes-local:604400/604800Bytes)(+0 +604800 4 1 604300/604800Bytes-local:604400/604800Bytes)
+Using EB Route in header. Next hop: 4
+*Best: routeTable[1][ ]: nextHop: 4, frm 0 to 5000, arrival time: 0, volume: 4500/5000Bytes
+queuing bundle in node 4(5)
+Node 5 enqueueBundleToNode bundleId: 61 nextNodeId: 4
+Random place 5
+TIME: 400s, NODE: 4, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][4]: nextHop: 4, frm 0 to 5000, arrival time: 0, volume: 4500/5000Bytes
+hops: (+0 +604800 5 4 604300/604800Bytes-local:604800/604800Bytes)(+0 +604800 4 1 604300/604800Bytes-local:604400/604800Bytes)
+Using EB Route in header. Next hop: 1
+*Best: routeTable[1][ ]: nextHop: 1, frm 0 to 5000, arrival time: 0, volume: 4500/5000Bytes
+queuing bundle in node 1(2)
+Node 4 enqueueBundleToNode bundleId: 61 nextNodeId: 1
+Random place 5
+bundlesInSdr: 0
+delay: (omnetpp::cPar)delay true
+numberOfBundlesScheduledThisTime: 0
+Less than 2 bundles will be in Dtn this time
+bundleInSdr: 0 , simTime: 500  => Bundle sent
+bundlesInSdr: 0
+delay: (omnetpp::cPar)delay true
+numberOfBundlesScheduledThisTime: 1
+2 bundles already in Dtn or scheduled to be sent to dtn
+bundleInSdr: 0 , simTime: 500  => Bundle sent
+TIME: 500s, NODE: 6, routing bundle : 6-1 (100Bytes)
+Route: 6 -> 3 -> 2 -> 1
+Route: 6 -> 5 -> 4 -> 1
+66
+BID : 66, FT : 0, TT : 5000, AT : 0, NH : 3 // Chosen route: 6 -> 3 -> 2 -> 1
+*Best: routeTable[1][ ]: nextHop: 3, frm 0 to 5000, arrival time: 0, volume: 4500/5000Bytes
+*Rvol: routeTable[1][0]: updated to 4400Bytes (all contacts)
+queuing bundle in node 3(7)
+Node 6 enqueueBundleToNode bundleId: 66 nextNodeId: 3
+TIME: 500s, NODE: 6, routing bundle : 6-1 (100Bytes)
+Route: 6 -> 3 -> 2 -> 1
+Route: 6 -> 5 -> 4 -> 1
+67
+BID : 67, FT : 0, TT : 5000, AT : 0, NH : 5 // Chosen route: 6 -> 5 -> 4 -> 1
+*Best: routeTable[1][ ]: nextHop: 5, frm 0 to 5000, arrival time: 0, volume: 4500/5000Bytes
+*Rvol: routeTable[1][1]: updated to 4400Bytes (all contacts)
+queuing bundle in node 5(8)
+Node 6 enqueueBundleToNode bundleId: 67 nextNodeId: 5
+Random place 5
+TIME: 500s, NODE: 3, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][3]: nextHop: 3, frm 0 to 5000, arrival time: 0, volume: 4400/5000Bytes
+hops: (+0 +5000 6 3 4400/5000Bytes-local:5000/5000Bytes)(+0 +604800 3 2 604200/604800Bytes-local:604300/604800Bytes)(+0 +604800 2 1 604200/604800Bytes-local:604300/604800Bytes)
+Using EB Route in header. Next hop: 2
+*Best: routeTable[1][ ]: nextHop: 2, frm 0 to 5000, arrival time: 0, volume: 4400/5000Bytes
+queuing bundle in node 2(3)
+Node 3 enqueueBundleToNode bundleId: 66 nextNodeId: 2
+Random place 5
+TIME: 500s, NODE: 5, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][5]: nextHop: 5, frm 0 to 5000, arrival time: 0, volume: 4400/5000Bytes
+hops: (+0 +5000 6 5 4400/5000Bytes-local:5000/5000Bytes)(+0 +604800 5 4 604200/604800Bytes-local:604300/604800Bytes)(+0 +604800 4 1 604200/604800Bytes-local:604300/604800Bytes)
+Using EB Route in header. Next hop: 4
+*Best: routeTable[1][ ]: nextHop: 4, frm 0 to 5000, arrival time: 0, volume: 4400/5000Bytes
+queuing bundle in node 4(5)
+Node 5 enqueueBundleToNode bundleId: 67 nextNodeId: 4
+Random place 5
+TIME: 500s, NODE: 4, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][4]: nextHop: 4, frm 0 to 5000, arrival time: 0, volume: 4400/5000Bytes
+hops: (+0 +604800 5 4 604200/604800Bytes-local:604800/604800Bytes)(+0 +604800 4 1 604200/604800Bytes-local:604300/604800Bytes)
+Using EB Route in header. Next hop: 1
+*Best: routeTable[1][ ]: nextHop: 1, frm 0 to 5000, arrival time: 0, volume: 4400/5000Bytes
+queuing bundle in node 1(2)
+Node 4 enqueueBundleToNode bundleId: 67 nextNodeId: 1
+Random place 5
+bundlesInSdr: 0
+delay: (omnetpp::cPar)delay true
+numberOfBundlesScheduledThisTime: 0
+Less than 2 bundles will be in Dtn this time
+bundleInSdr: 0 , simTime: 600  => Bundle sent
+bundlesInSdr: 0
+delay: (omnetpp::cPar)delay true
+numberOfBundlesScheduledThisTime: 1
+2 bundles already in Dtn or scheduled to be sent to dtn
+bundleInSdr: 0 , simTime: 600  => Bundle sent
+TIME: 600s, NODE: 6, routing bundle : 6-1 (100Bytes)
+Route: 6 -> 3 -> 2 -> 1
+Route: 6 -> 5 -> 4 -> 1
+72
+BID : 72, FT : 0, TT : 5000, AT : 0, NH : 3 // Chosen route: 6 -> 3 -> 2 -> 1
+*Best: routeTable[1][ ]: nextHop: 3, frm 0 to 5000, arrival time: 0, volume: 4400/5000Bytes
+*Rvol: routeTable[1][0]: updated to 4300Bytes (all contacts)
+queuing bundle in node 3(7)
+Node 6 enqueueBundleToNode bundleId: 72 nextNodeId: 3
+TIME: 600s, NODE: 6, routing bundle : 6-1 (100Bytes)
+Route: 6 -> 3 -> 2 -> 1
+Route: 6 -> 5 -> 4 -> 1
+73
+BID : 73, FT : 0, TT : 5000, AT : 0, NH : 5 // Chosen route: 6 -> 5 -> 4 -> 1
+*Best: routeTable[1][ ]: nextHop: 5, frm 0 to 5000, arrival time: 0, volume: 4400/5000Bytes
+*Rvol: routeTable[1][1]: updated to 4300Bytes (all contacts)
+queuing bundle in node 5(8)
+Node 6 enqueueBundleToNode bundleId: 73 nextNodeId: 5
+Random place 5
+TIME: 600s, NODE: 3, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][3]: nextHop: 3, frm 0 to 5000, arrival time: 0, volume: 4300/5000Bytes
+hops: (+0 +5000 6 3 4300/5000Bytes-local:5000/5000Bytes)(+0 +604800 3 2 604100/604800Bytes-local:604200/604800Bytes)(+0 +604800 2 1 604100/604800Bytes-local:604200/604800Bytes)
+Using EB Route in header. Next hop: 2
+*Best: routeTable[1][ ]: nextHop: 2, frm 0 to 5000, arrival time: 0, volume: 4300/5000Bytes
+queuing bundle in node 2(3)
+Node 3 enqueueBundleToNode bundleId: 72 nextNodeId: 2
+Random place 5
+TIME: 600s, NODE: 5, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][5]: nextHop: 5, frm 0 to 5000, arrival time: 0, volume: 4300/5000Bytes
+hops: (+0 +5000 6 5 4300/5000Bytes-local:5000/5000Bytes)(+0 +604800 5 4 604100/604800Bytes-local:604200/604800Bytes)(+0 +604800 4 1 604100/604800Bytes-local:604200/604800Bytes)
+Using EB Route in header. Next hop: 4
+*Best: routeTable[1][ ]: nextHop: 4, frm 0 to 5000, arrival time: 0, volume: 4300/5000Bytes
+queuing bundle in node 4(5)
+Node 5 enqueueBundleToNode bundleId: 73 nextNodeId: 4
+Random place 5
+TIME: 600s, NODE: 4, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][4]: nextHop: 4, frm 0 to 5000, arrival time: 0, volume: 4300/5000Bytes
+hops: (+0 +604800 5 4 604100/604800Bytes-local:604800/604800Bytes)(+0 +604800 4 1 604100/604800Bytes-local:604200/604800Bytes)
+Using EB Route in header. Next hop: 1
+*Best: routeTable[1][ ]: nextHop: 1, frm 0 to 5000, arrival time: 0, volume: 4300/5000Bytes
+queuing bundle in node 1(2)
+Node 4 enqueueBundleToNode bundleId: 73 nextNodeId: 1
+Random place 5
+bundlesInSdr: 0
+delay: (omnetpp::cPar)delay true
+numberOfBundlesScheduledThisTime: 0
+Less than 2 bundles will be in Dtn this time
+bundleInSdr: 0 , simTime: 700  => Bundle sent
+bundlesInSdr: 0
+delay: (omnetpp::cPar)delay true
+numberOfBundlesScheduledThisTime: 1
+2 bundles already in Dtn or scheduled to be sent to dtn
+bundleInSdr: 0 , simTime: 700  => Bundle sent
+TIME: 700s, NODE: 6, routing bundle : 6-1 (100Bytes)
+Route: 6 -> 3 -> 2 -> 1
+Route: 6 -> 5 -> 4 -> 1
+78
+BID : 78, FT : 0, TT : 5000, AT : 0, NH : 3 // Chosen route: 6 -> 3 -> 2 -> 1
+*Best: routeTable[1][ ]: nextHop: 3, frm 0 to 5000, arrival time: 0, volume: 4300/5000Bytes
+*Rvol: routeTable[1][0]: updated to 4200Bytes (all contacts)
+queuing bundle in node 3(7)
+Node 6 enqueueBundleToNode bundleId: 78 nextNodeId: 3
+TIME: 700s, NODE: 6, routing bundle : 6-1 (100Bytes)
+Route: 6 -> 3 -> 2 -> 1
+Route: 6 -> 5 -> 4 -> 1
+79
+BID : 79, FT : 0, TT : 5000, AT : 0, NH : 5 // Chosen route: 6 -> 5 -> 4 -> 1
+*Best: routeTable[1][ ]: nextHop: 5, frm 0 to 5000, arrival time: 0, volume: 4300/5000Bytes
+*Rvol: routeTable[1][1]: updated to 4200Bytes (all contacts)
+queuing bundle in node 5(8)
+Node 6 enqueueBundleToNode bundleId: 79 nextNodeId: 5
+Random place 5
+TIME: 700s, NODE: 3, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][3]: nextHop: 3, frm 0 to 5000, arrival time: 0, volume: 4200/5000Bytes
+hops: (+0 +5000 6 3 4200/5000Bytes-local:5000/5000Bytes)(+0 +604800 3 2 604000/604800Bytes-local:604100/604800Bytes)(+0 +604800 2 1 604000/604800Bytes-local:604100/604800Bytes)
+Using EB Route in header. Next hop: 2
+*Best: routeTable[1][ ]: nextHop: 2, frm 0 to 5000, arrival time: 0, volume: 4200/5000Bytes
+queuing bundle in node 2(3)
+Node 3 enqueueBundleToNode bundleId: 78 nextNodeId: 2
+Random place 5
+TIME: 700s, NODE: 5, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][5]: nextHop: 5, frm 0 to 5000, arrival time: 0, volume: 4200/5000Bytes
+hops: (+0 +5000 6 5 4200/5000Bytes-local:5000/5000Bytes)(+0 +604800 5 4 604000/604800Bytes-local:604100/604800Bytes)(+0 +604800 4 1 604000/604800Bytes-local:604100/604800Bytes)
+Using EB Route in header. Next hop: 4
+*Best: routeTable[1][ ]: nextHop: 4, frm 0 to 5000, arrival time: 0, volume: 4200/5000Bytes
+queuing bundle in node 4(5)
+Node 5 enqueueBundleToNode bundleId: 79 nextNodeId: 4
+Random place 5
+TIME: 700s, NODE: 4, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][4]: nextHop: 4, frm 0 to 5000, arrival time: 0, volume: 4200/5000Bytes
+hops: (+0 +604800 5 4 604000/604800Bytes-local:604800/604800Bytes)(+0 +604800 4 1 604000/604800Bytes-local:604100/604800Bytes)
+Using EB Route in header. Next hop: 1
+*Best: routeTable[1][ ]: nextHop: 1, frm 0 to 5000, arrival time: 0, volume: 4200/5000Bytes
+queuing bundle in node 1(2)
+Node 4 enqueueBundleToNode bundleId: 79 nextNodeId: 1
+Random place 5
+Use of the randomness
+With 300 Recovery at 743.342382749502 seconds at node 4
+Use of the randomness
+With 600 Next fault at 1138.232150687374 seconds at node 4
+bundlesInSdr: 0
+delay: (omnetpp::cPar)delay true
+numberOfBundlesScheduledThisTime: 0
+Less than 2 bundles will be in Dtn this time
+bundleInSdr: 0 , simTime: 800  => Bundle sent
+bundlesInSdr: 0
+delay: (omnetpp::cPar)delay true
+numberOfBundlesScheduledThisTime: 1
+2 bundles already in Dtn or scheduled to be sent to dtn
+bundleInSdr: 0 , simTime: 800  => Bundle sent
+TIME: 800s, NODE: 6, routing bundle : 6-1 (100Bytes)
+Route: 6 -> 3 -> 2 -> 1
+Route: 6 -> 5 -> 4 -> 1
+84
+BID : 84, FT : 0, TT : 5000, AT : 0, NH : 3 // Chosen route: 6 -> 3 -> 2 -> 1
+*Best: routeTable[1][ ]: nextHop: 3, frm 0 to 5000, arrival time: 0, volume: 4200/5000Bytes
+*Rvol: routeTable[1][0]: updated to 4100Bytes (all contacts)
+queuing bundle in node 3(7)
+Node 6 enqueueBundleToNode bundleId: 84 nextNodeId: 3
+TIME: 800s, NODE: 6, routing bundle : 6-1 (100Bytes)
+Route: 6 -> 3 -> 2 -> 1
+Route: 6 -> 5 -> 4 -> 1
+85
+BID : 85, FT : 0, TT : 5000, AT : 0, NH : 5 // Chosen route: 6 -> 5 -> 4 -> 1
+*Best: routeTable[1][ ]: nextHop: 5, frm 0 to 5000, arrival time: 0, volume: 4200/5000Bytes
+*Rvol: routeTable[1][1]: updated to 4100Bytes (all contacts)
+queuing bundle in node 5(8)
+Node 6 enqueueBundleToNode bundleId: 85 nextNodeId: 5
+Random place 5
+TIME: 800s, NODE: 3, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][3]: nextHop: 3, frm 0 to 5000, arrival time: 0, volume: 4100/5000Bytes
+hops: (+0 +5000 6 3 4100/5000Bytes-local:5000/5000Bytes)(+0 +604800 3 2 603900/604800Bytes-local:604000/604800Bytes)(+0 +604800 2 1 603900/604800Bytes-local:604000/604800Bytes)
+Using EB Route in header. Next hop: 2
+*Best: routeTable[1][ ]: nextHop: 2, frm 0 to 5000, arrival time: 0, volume: 4100/5000Bytes
+queuing bundle in node 2(3)
+Node 3 enqueueBundleToNode bundleId: 84 nextNodeId: 2
+Random place 5
+TIME: 800s, NODE: 5, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][5]: nextHop: 5, frm 0 to 5000, arrival time: 0, volume: 4100/5000Bytes
+hops: (+0 +5000 6 5 4100/5000Bytes-local:5000/5000Bytes)(+0 +604800 5 4 603900/604800Bytes-local:604000/604800Bytes)(+0 +604800 4 1 603900/604800Bytes-local:604000/604800Bytes)
+Using EB Route in header. Next hop: 4
+*Best: routeTable[1][ ]: nextHop: 4, frm 0 to 5000, arrival time: 0, volume: 4100/5000Bytes
+queuing bundle in node 4(5)
+Node 5 enqueueBundleToNode bundleId: 85 nextNodeId: 4
+Random place 5
+TIME: 800s, NODE: 4, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][4]: nextHop: 4, frm 0 to 5000, arrival time: 0, volume: 4100/5000Bytes
+hops: (+0 +604800 5 4 603900/604800Bytes-local:604800/604800Bytes)(+0 +604800 4 1 603900/604800Bytes-local:604000/604800Bytes)
+Using EB Route in header. Next hop: 1
+*Best: routeTable[1][ ]: nextHop: 1, frm 0 to 5000, arrival time: 0, volume: 4100/5000Bytes
+queuing bundle in node 1(2)
+Node 4 enqueueBundleToNode bundleId: 85 nextNodeId: 1
+Random place 5
+bundlesInSdr: 0
+delay: (omnetpp::cPar)delay true
+numberOfBundlesScheduledThisTime: 0
+Less than 2 bundles will be in Dtn this time
+bundleInSdr: 0 , simTime: 900  => Bundle sent
+bundlesInSdr: 0
+delay: (omnetpp::cPar)delay true
+numberOfBundlesScheduledThisTime: 1
+2 bundles already in Dtn or scheduled to be sent to dtn
+bundleInSdr: 0 , simTime: 900  => Bundle sent
+TIME: 900s, NODE: 6, routing bundle : 6-1 (100Bytes)
+Route: 6 -> 3 -> 2 -> 1
+Route: 6 -> 5 -> 4 -> 1
+90
+BID : 90, FT : 0, TT : 5000, AT : 0, NH : 5 // Chosen route: 6 -> 5 -> 4 -> 1
+*Best: routeTable[1][ ]: nextHop: 5, frm 0 to 5000, arrival time: 0, volume: 4100/5000Bytes
+*Rvol: routeTable[1][1]: updated to 4000Bytes (all contacts)
+queuing bundle in node 5(8)
+Node 6 enqueueBundleToNode bundleId: 90 nextNodeId: 5
+TIME: 900s, NODE: 6, routing bundle : 6-1 (100Bytes)
+Route: 6 -> 3 -> 2 -> 1
+Route: 6 -> 5 -> 4 -> 1
+91
+BID : 91, FT : 0, TT : 5000, AT : 0, NH : 5 // Chosen route: 6 -> 5 -> 4 -> 1
+*Best: routeTable[1][ ]: nextHop: 5, frm 0 to 5000, arrival time: 0, volume: 4000/5000Bytes
+*Rvol: routeTable[1][1]: updated to 3900Bytes (all contacts)
+queuing bundle in node 5(8)
+Node 6 enqueueBundleToNode bundleId: 91 nextNodeId: 5
+Random place 5
+TIME: 900s, NODE: 5, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][5]: nextHop: 5, frm 0 to 5000, arrival time: 0, volume: 4000/5000Bytes
+hops: (+0 +5000 6 5 3900/5000Bytes-local:5000/5000Bytes)(+0 +604800 5 4 603700/604800Bytes-local:603900/604800Bytes)(+0 +604800 4 1 603700/604800Bytes-local:603900/604800Bytes)
+Using EB Route in header. Next hop: 4
+*Best: routeTable[1][ ]: nextHop: 4, frm 0 to 5000, arrival time: 0, volume: 4000/5000Bytes
+queuing bundle in node 4(5)
+Node 5 enqueueBundleToNode bundleId: 90 nextNodeId: 4
+Random place 5
+TIME: 900s, NODE: 4, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][4]: nextHop: 4, frm 0 to 5000, arrival time: 0, volume: 4000/5000Bytes
+hops: (+0 +604800 5 4 603800/604800Bytes-local:604800/604800Bytes)(+0 +604800 4 1 603800/604800Bytes-local:603900/604800Bytes)
+Using EB Route in header. Next hop: 1
+*Best: routeTable[1][ ]: nextHop: 1, frm 0 to 5000, arrival time: 0, volume: 4000/5000Bytes
+queuing bundle in node 1(2)
+Node 4 enqueueBundleToNode bundleId: 90 nextNodeId: 1
+Random place 5
+bundlesInSdr: 1
+delay: (omnetpp::cPar)delay true
+numberOfBundlesScheduledThisTime: 0
+2 bundles already in Dtn or scheduled to be sent to dtn
+bundleInSdr: 1 , simTime: 1000  => Bundle sent
+TIME: 1000s, NODE: 6, routing bundle : 6-1 (100Bytes)
+Route: 6 -> 3 -> 2 -> 1
+Route: 6 -> 5 -> 4 -> 1
+95
+BID : 95, FT : 0, TT : 5000, AT : 0, NH : 5 // Chosen route: 6 -> 5 -> 4 -> 1
+*Best: routeTable[1][ ]: nextHop: 5, frm 0 to 5000, arrival time: 0, volume: 3900/5000Bytes
+*Rvol: routeTable[1][1]: updated to 3800Bytes (all contacts)
+queuing bundle in node 5(8)
+Node 6 enqueueBundleToNode bundleId: 95 nextNodeId: 5
+Random place 5
+TIME: 1000s, NODE: 5, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][5]: nextHop: 5, frm 0 to 5000, arrival time: 0, volume: 3900/5000Bytes
+hops: (+0 +5000 6 5 3800/5000Bytes-local:5000/5000Bytes)(+0 +604800 5 4 603600/604800Bytes-local:603800/604800Bytes)(+0 +604800 4 1 603600/604800Bytes-local:603800/604800Bytes)
+Using EB Route in header. Next hop: 4
+*Best: routeTable[1][ ]: nextHop: 4, frm 0 to 5000, arrival time: 0, volume: 3900/5000Bytes
+queuing bundle in node 4(5)
+Node 5 enqueueBundleToNode bundleId: 91 nextNodeId: 4
+Random place 5
+TIME: 1000s, NODE: 4, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][4]: nextHop: 4, frm 0 to 5000, arrival time: 0, volume: 3900/5000Bytes
+hops: (+0 +604800 5 4 603700/604800Bytes-local:604800/604800Bytes)(+0 +604800 4 1 603700/604800Bytes-local:603800/604800Bytes)
+Using EB Route in header. Next hop: 1
+*Best: routeTable[1][ ]: nextHop: 1, frm 0 to 5000, arrival time: 0, volume: 3900/5000Bytes
+queuing bundle in node 1(2)
+Node 4 enqueueBundleToNode bundleId: 91 nextNodeId: 1
+Random place 5
+bundlesInSdr: 1
+delay: (omnetpp::cPar)delay true
+numberOfBundlesScheduledThisTime: 0
+2 bundles already in Dtn or scheduled to be sent to dtn
+bundleInSdr: 1 , simTime: 1100  => Bundle sent
+TIME: 1100s, NODE: 6, routing bundle : 6-1 (100Bytes)
+Route: 6 -> 3 -> 2 -> 1
+Route: 6 -> 5 -> 4 -> 1
+99
+BID : 99, FT : 0, TT : 5000, AT : 0, NH : 5 // Chosen route: 6 -> 5 -> 4 -> 1
+*Best: routeTable[1][ ]: nextHop: 5, frm 0 to 5000, arrival time: 0, volume: 3800/5000Bytes
+*Rvol: routeTable[1][1]: updated to 3700Bytes (all contacts)
+queuing bundle in node 5(8)
+Node 6 enqueueBundleToNode bundleId: 99 nextNodeId: 5
+Random place 5
+TIME: 1100s, NODE: 5, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][5]: nextHop: 5, frm 0 to 5000, arrival time: 0, volume: 3800/5000Bytes
+hops: (+0 +5000 6 5 3700/5000Bytes-local:5000/5000Bytes)(+0 +604800 5 4 603500/604800Bytes-local:603700/604800Bytes)(+0 +604800 4 1 603500/604800Bytes-local:603700/604800Bytes)
+Using EB Route in header. Next hop: 4
+*Best: routeTable[1][ ]: nextHop: 4, frm 0 to 5000, arrival time: 0, volume: 3800/5000Bytes
+queuing bundle in node 4(5)
+Node 5 enqueueBundleToNode bundleId: 95 nextNodeId: 4
+Random place 5
+TIME: 1100s, NODE: 4, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][4]: nextHop: 4, frm 0 to 5000, arrival time: 0, volume: 3800/5000Bytes
+hops: (+0 +604800 5 4 603600/604800Bytes-local:604800/604800Bytes)(+0 +604800 4 1 603600/604800Bytes-local:603700/604800Bytes)
+Using EB Route in header. Next hop: 1
+*Best: routeTable[1][ ]: nextHop: 1, frm 0 to 5000, arrival time: 0, volume: 3800/5000Bytes
+queuing bundle in node 1(2)
+Node 4 enqueueBundleToNode bundleId: 95 nextNodeId: 1
+Random place 5
+Use of the randomness
+With 300 Recovery at 1272.49439644073 seconds at node 4
+bundlesInSdr: 1
+delay: (omnetpp::cPar)delay true
+numberOfBundlesScheduledThisTime: 0
+2 bundles already in Dtn or scheduled to be sent to dtn
+bundleInSdr: 1 , simTime: 1200  => Bundle sent
+TIME: 1200s, NODE: 6, routing bundle : 6-1 (100Bytes)
+Route: 6 -> 3 -> 2 -> 1
+Route: 6 -> 5 -> 4 -> 1
+3
+BID : 103, FT : 0, TT : 5000, AT : 0, NH : 5 // Chosen route: 6 -> 5 -> 4 -> 1
+*Best: routeTable[1][ ]: nextHop: 5, frm 0 to 5000, arrival time: 0, volume: 3700/5000Bytes
+*Rvol: routeTable[1][1]: updated to 3600Bytes (all contacts)
+queuing bundle in node 5(8)
+Node 6 enqueueBundleToNode bundleId: 103 nextNodeId: 5
+Random place 5
+TIME: 1200s, NODE: 5, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][5]: nextHop: 5, frm 0 to 5000, arrival time: 0, volume: 3700/5000Bytes
+hops: (+0 +5000 6 5 3600/5000Bytes-local:5000/5000Bytes)(+0 +604800 5 4 603400/604800Bytes-local:603600/604800Bytes)(+0 +604800 4 1 603400/604800Bytes-local:603600/604800Bytes)
+Using EB Route in header. Next hop: 4
+*Best: routeTable[1][ ]: nextHop: 4, frm 0 to 5000, arrival time: 0, volume: 3700/5000Bytes
+queuing bundle in node 4(5)
+Node 5 enqueueBundleToNode bundleId: 99 nextNodeId: 4
+Use of the randomness
+With 300 Next fault at 1836.292802427045 seconds at node 2
+Random place 5
+TIME: 1218.46s, NODE: 2, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][2]: nextHop: 2, frm 0 to 5000, arrival time: 0, volume: 4500/5000Bytes
+hops: (+0 +604800 3 2 603900/604800Bytes-local:604800/604800Bytes)(+0 +604800 2 1 603900/604800Bytes-local:604400/604800Bytes)
+Using EB Route in header. Next hop: 1
+*Best: routeTable[1][ ]: nextHop: 1, frm 0 to 5000, arrival time: 0, volume: 4500/5000Bytes
+queuing bundle in node 1(1)
+Node 2 enqueueBundleToNode bundleId: 60 nextNodeId: 1
+Random place 5
+Use of the randomness
+With 600 Next fault at 2410.721780914263 seconds at node 4
+Random place 5
+TIME: 1272.49s, NODE: 4, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][4]: nextHop: 4, frm 0 to 5000, arrival time: 0, volume: 3700/5000Bytes
+hops: (+0 +604800 5 4 603500/604800Bytes-local:604800/604800Bytes)(+0 +604800 4 1 603500/604800Bytes-local:603600/604800Bytes)
+Using EB Route in header. Next hop: 1
+*Best: routeTable[1][ ]: nextHop: 1, frm 0 to 5000, arrival time: 0, volume: 3700/5000Bytes
+queuing bundle in node 1(2)
+Node 4 enqueueBundleToNode bundleId: 99 nextNodeId: 1
+Random place 5
+bundlesInSdr: 1
+delay: (omnetpp::cPar)delay true
+numberOfBundlesScheduledThisTime: 0
+2 bundles already in Dtn or scheduled to be sent to dtn
+bundleInSdr: 1 , simTime: 1300  => Bundle sent
+TIME: 1300s, NODE: 6, routing bundle : 6-1 (100Bytes)
+Route: 6 -> 3 -> 2 -> 1
+Route: 6 -> 5 -> 4 -> 1
+9
+BID : 109, FT : 0, TT : 5000, AT : 0, NH : 5 // Chosen route: 6 -> 5 -> 4 -> 1
+*Best: routeTable[1][ ]: nextHop: 5, frm 0 to 5000, arrival time: 0, volume: 3600/5000Bytes
+*Rvol: routeTable[1][1]: updated to 3500Bytes (all contacts)
+queuing bundle in node 5(8)
+Node 6 enqueueBundleToNode bundleId: 109 nextNodeId: 5
+Random place 5
+TIME: 1300s, NODE: 5, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][5]: nextHop: 5, frm 0 to 5000, arrival time: 0, volume: 3600/5000Bytes
+hops: (+0 +5000 6 5 3500/5000Bytes-local:5000/5000Bytes)(+0 +604800 5 4 603300/604800Bytes-local:603500/604800Bytes)(+0 +604800 4 1 603300/604800Bytes-local:603500/604800Bytes)
+Using EB Route in header. Next hop: 4
+*Best: routeTable[1][ ]: nextHop: 4, frm 0 to 5000, arrival time: 0, volume: 3600/5000Bytes
+queuing bundle in node 4(5)
+Node 5 enqueueBundleToNode bundleId: 103 nextNodeId: 4
+Random place 5
+TIME: 1318.46s, NODE: 2, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][2]: nextHop: 2, frm 0 to 5000, arrival time: 0, volume: 4400/5000Bytes
+hops: (+0 +604800 3 2 603900/604800Bytes-local:604800/604800Bytes)(+0 +604800 2 1 603900/604800Bytes-local:604300/604800Bytes)
+Using EB Route in header. Next hop: 1
+*Best: routeTable[1][ ]: nextHop: 1, frm 0 to 5000, arrival time: 0, volume: 4400/5000Bytes
+queuing bundle in node 1(1)
+Node 2 enqueueBundleToNode bundleId: 66 nextNodeId: 1
+Random place 5
+Random place 5
+TIME: 1372.49s, NODE: 4, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][4]: nextHop: 4, frm 0 to 5000, arrival time: 0, volume: 3600/5000Bytes
+hops: (+0 +604800 5 4 603400/604800Bytes-local:604800/604800Bytes)(+0 +604800 4 1 603400/604800Bytes-local:603500/604800Bytes)
+Using EB Route in header. Next hop: 1
+*Best: routeTable[1][ ]: nextHop: 1, frm 0 to 5000, arrival time: 0, volume: 3600/5000Bytes
+queuing bundle in node 1(2)
+Node 4 enqueueBundleToNode bundleId: 103 nextNodeId: 1
+Random place 5
+bundlesInSdr: 1
+delay: (omnetpp::cPar)delay true
+numberOfBundlesScheduledThisTime: 0
+2 bundles already in Dtn or scheduled to be sent to dtn
+bundleInSdr: 1 , simTime: 1400  => Bundle sent
+TIME: 1400s, NODE: 6, routing bundle : 6-1 (100Bytes)
+Route: 6 -> 3 -> 2 -> 1
+Route: 6 -> 5 -> 4 -> 1
+15
+BID : 115, FT : 0, TT : 5000, AT : 0, NH : 5 // Chosen route: 6 -> 5 -> 4 -> 1
+*Best: routeTable[1][ ]: nextHop: 5, frm 0 to 5000, arrival time: 0, volume: 3500/5000Bytes
+*Rvol: routeTable[1][1]: updated to 3400Bytes (all contacts)
+queuing bundle in node 5(8)
+Node 6 enqueueBundleToNode bundleId: 115 nextNodeId: 5
+Random place 5
+TIME: 1400s, NODE: 5, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][5]: nextHop: 5, frm 0 to 5000, arrival time: 0, volume: 3500/5000Bytes
+hops: (+0 +5000 6 5 3400/5000Bytes-local:5000/5000Bytes)(+0 +604800 5 4 603200/604800Bytes-local:603400/604800Bytes)(+0 +604800 4 1 603200/604800Bytes-local:603400/604800Bytes)
+Using EB Route in header. Next hop: 4
+*Best: routeTable[1][ ]: nextHop: 4, frm 0 to 5000, arrival time: 0, volume: 3500/5000Bytes
+queuing bundle in node 4(5)
+Node 5 enqueueBundleToNode bundleId: 109 nextNodeId: 4
+Random place 5
+TIME: 1418.46s, NODE: 2, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][2]: nextHop: 2, frm 0 to 5000, arrival time: 0, volume: 4300/5000Bytes
+hops: (+0 +604800 3 2 603900/604800Bytes-local:604800/604800Bytes)(+0 +604800 2 1 603900/604800Bytes-local:604200/604800Bytes)
+Using EB Route in header. Next hop: 1
+*Best: routeTable[1][ ]: nextHop: 1, frm 0 to 5000, arrival time: 0, volume: 4300/5000Bytes
+queuing bundle in node 1(1)
+Node 2 enqueueBundleToNode bundleId: 72 nextNodeId: 1
+Random place 5
+Random place 5
+TIME: 1472.49s, NODE: 4, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][4]: nextHop: 4, frm 0 to 5000, arrival time: 0, volume: 3500/5000Bytes
+hops: (+0 +604800 5 4 603300/604800Bytes-local:604800/604800Bytes)(+0 +604800 4 1 603300/604800Bytes-local:603400/604800Bytes)
+Using EB Route in header. Next hop: 1
+*Best: routeTable[1][ ]: nextHop: 1, frm 0 to 5000, arrival time: 0, volume: 3500/5000Bytes
+queuing bundle in node 1(2)
+Node 4 enqueueBundleToNode bundleId: 109 nextNodeId: 1
+Random place 5
+bundlesInSdr: 1
+delay: (omnetpp::cPar)delay true
+numberOfBundlesScheduledThisTime: 0
+2 bundles already in Dtn or scheduled to be sent to dtn
+bundleInSdr: 1 , simTime: 1500  => Bundle sent
+TIME: 1500s, NODE: 6, routing bundle : 6-1 (100Bytes)
+Route: 6 -> 3 -> 2 -> 1
+Route: 6 -> 5 -> 4 -> 1
+21
+BID : 121, FT : 0, TT : 5000, AT : 0, NH : 5 // Chosen route: 6 -> 5 -> 4 -> 1
+*Best: routeTable[1][ ]: nextHop: 5, frm 0 to 5000, arrival time: 0, volume: 3400/5000Bytes
+*Rvol: routeTable[1][1]: updated to 3300Bytes (all contacts)
+queuing bundle in node 5(8)
+Node 6 enqueueBundleToNode bundleId: 121 nextNodeId: 5
+Random place 5
+TIME: 1500s, NODE: 5, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][5]: nextHop: 5, frm 0 to 5000, arrival time: 0, volume: 3400/5000Bytes
+hops: (+0 +5000 6 5 3300/5000Bytes-local:5000/5000Bytes)(+0 +604800 5 4 603100/604800Bytes-local:603300/604800Bytes)(+0 +604800 4 1 603100/604800Bytes-local:603300/604800Bytes)
+Using EB Route in header. Next hop: 4
+*Best: routeTable[1][ ]: nextHop: 4, frm 0 to 5000, arrival time: 0, volume: 3400/5000Bytes
+queuing bundle in node 4(5)
+Node 5 enqueueBundleToNode bundleId: 115 nextNodeId: 4
+Random place 5
+TIME: 1518.46s, NODE: 2, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][2]: nextHop: 2, frm 0 to 5000, arrival time: 0, volume: 4200/5000Bytes
+hops: (+0 +604800 3 2 603900/604800Bytes-local:604800/604800Bytes)(+0 +604800 2 1 603900/604800Bytes-local:604100/604800Bytes)
+Using EB Route in header. Next hop: 1
+*Best: routeTable[1][ ]: nextHop: 1, frm 0 to 5000, arrival time: 0, volume: 4200/5000Bytes
+queuing bundle in node 1(1)
+Node 2 enqueueBundleToNode bundleId: 78 nextNodeId: 1
+Random place 5
+Random place 5
+TIME: 1572.49s, NODE: 4, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][4]: nextHop: 4, frm 0 to 5000, arrival time: 0, volume: 3400/5000Bytes
+hops: (+0 +604800 5 4 603200/604800Bytes-local:604800/604800Bytes)(+0 +604800 4 1 603200/604800Bytes-local:603300/604800Bytes)
+Using EB Route in header. Next hop: 1
+*Best: routeTable[1][ ]: nextHop: 1, frm 0 to 5000, arrival time: 0, volume: 3400/5000Bytes
+queuing bundle in node 1(2)
+Node 4 enqueueBundleToNode bundleId: 115 nextNodeId: 1
+Random place 5
+bundlesInSdr: 1
+delay: (omnetpp::cPar)delay true
+numberOfBundlesScheduledThisTime: 0
+2 bundles already in Dtn or scheduled to be sent to dtn
+bundleInSdr: 1 , simTime: 1600  => Bundle sent
+TIME: 1600s, NODE: 6, routing bundle : 6-1 (100Bytes)
+Route: 6 -> 3 -> 2 -> 1
+Route: 6 -> 5 -> 4 -> 1
+27
+BID : 127, FT : 0, TT : 5000, AT : 0, NH : 5 // Chosen route: 6 -> 5 -> 4 -> 1
+*Best: routeTable[1][ ]: nextHop: 5, frm 0 to 5000, arrival time: 0, volume: 3300/5000Bytes
+*Rvol: routeTable[1][1]: updated to 3200Bytes (all contacts)
+queuing bundle in node 5(8)
+Node 6 enqueueBundleToNode bundleId: 127 nextNodeId: 5
+Random place 5
+TIME: 1600s, NODE: 5, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][5]: nextHop: 5, frm 0 to 5000, arrival time: 0, volume: 3300/5000Bytes
+hops: (+0 +5000 6 5 3200/5000Bytes-local:5000/5000Bytes)(+0 +604800 5 4 603000/604800Bytes-local:603200/604800Bytes)(+0 +604800 4 1 603000/604800Bytes-local:603200/604800Bytes)
+Using EB Route in header. Next hop: 4
+*Best: routeTable[1][ ]: nextHop: 4, frm 0 to 5000, arrival time: 0, volume: 3300/5000Bytes
+queuing bundle in node 4(5)
+Node 5 enqueueBundleToNode bundleId: 121 nextNodeId: 4
+Random place 5
+TIME: 1618.46s, NODE: 2, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][2]: nextHop: 2, frm 0 to 5000, arrival time: 0, volume: 4100/5000Bytes
+hops: (+0 +604800 3 2 603900/604800Bytes-local:604800/604800Bytes)(+0 +604800 2 1 603900/604800Bytes-local:604000/604800Bytes)
+Using EB Route in header. Next hop: 1
+*Best: routeTable[1][ ]: nextHop: 1, frm 0 to 5000, arrival time: 0, volume: 4100/5000Bytes
+queuing bundle in node 1(1)
+Node 2 enqueueBundleToNode bundleId: 84 nextNodeId: 1
+Random place 5
+Random place 5
+TIME: 1672.49s, NODE: 4, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][4]: nextHop: 4, frm 0 to 5000, arrival time: 0, volume: 3300/5000Bytes
+hops: (+0 +604800 5 4 603100/604800Bytes-local:604800/604800Bytes)(+0 +604800 4 1 603100/604800Bytes-local:603200/604800Bytes)
+Using EB Route in header. Next hop: 1
+*Best: routeTable[1][ ]: nextHop: 1, frm 0 to 5000, arrival time: 0, volume: 3300/5000Bytes
+queuing bundle in node 1(2)
+Node 4 enqueueBundleToNode bundleId: 121 nextNodeId: 1
+Random place 5
+bundlesInSdr: 1
+delay: (omnetpp::cPar)delay true
+numberOfBundlesScheduledThisTime: 0
+2 bundles already in Dtn or scheduled to be sent to dtn
+bundleInSdr: 1 , simTime: 1700  => Bundle sent
+TIME: 1700s, NODE: 6, routing bundle : 6-1 (100Bytes)
+Route: 6 -> 3 -> 2 -> 1
+Route: 6 -> 5 -> 4 -> 1
+33
+BID : 133, FT : 0, TT : 5000, AT : 0, NH : 5 // Chosen route: 6 -> 5 -> 4 -> 1
+*Best: routeTable[1][ ]: nextHop: 5, frm 0 to 5000, arrival time: 0, volume: 3200/5000Bytes
+*Rvol: routeTable[1][1]: updated to 3100Bytes (all contacts)
+queuing bundle in node 5(8)
+Node 6 enqueueBundleToNode bundleId: 133 nextNodeId: 5
+Random place 5
+TIME: 1700s, NODE: 5, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][5]: nextHop: 5, frm 0 to 5000, arrival time: 0, volume: 3200/5000Bytes
+hops: (+0 +5000 6 5 3100/5000Bytes-local:5000/5000Bytes)(+0 +604800 5 4 602900/604800Bytes-local:603100/604800Bytes)(+0 +604800 4 1 602900/604800Bytes-local:603100/604800Bytes)
+Using EB Route in header. Next hop: 4
+*Best: routeTable[1][ ]: nextHop: 4, frm 0 to 5000, arrival time: 0, volume: 3200/5000Bytes
+queuing bundle in node 4(5)
+Node 5 enqueueBundleToNode bundleId: 127 nextNodeId: 4
+Random place 5
+TIME: 1772.49s, NODE: 4, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][4]: nextHop: 4, frm 0 to 5000, arrival time: 0, volume: 3200/5000Bytes
+hops: (+0 +604800 5 4 603000/604800Bytes-local:604800/604800Bytes)(+0 +604800 4 1 603000/604800Bytes-local:603100/604800Bytes)
+Using EB Route in header. Next hop: 1
+*Best: routeTable[1][ ]: nextHop: 1, frm 0 to 5000, arrival time: 0, volume: 3200/5000Bytes
+queuing bundle in node 1(2)
+Node 4 enqueueBundleToNode bundleId: 127 nextNodeId: 1
+Random place 5
+bundlesInSdr: 1
+delay: (omnetpp::cPar)delay true
+numberOfBundlesScheduledThisTime: 0
+2 bundles already in Dtn or scheduled to be sent to dtn
+bundleInSdr: 1 , simTime: 1800  => Bundle sent
+TIME: 1800s, NODE: 6, routing bundle : 6-1 (100Bytes)
+Route: 6 -> 3 -> 2 -> 1
+Route: 6 -> 5 -> 4 -> 1
+37
+BID : 137, FT : 0, TT : 5000, AT : 0, NH : 5 // Chosen route: 6 -> 5 -> 4 -> 1
+*Best: routeTable[1][ ]: nextHop: 5, frm 0 to 5000, arrival time: 0, volume: 3100/5000Bytes
+*Rvol: routeTable[1][1]: updated to 3000Bytes (all contacts)
+queuing bundle in node 5(8)
+Node 6 enqueueBundleToNode bundleId: 137 nextNodeId: 5
+Random place 5
+TIME: 1800s, NODE: 5, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][5]: nextHop: 5, frm 0 to 5000, arrival time: 0, volume: 3100/5000Bytes
+hops: (+0 +5000 6 5 3000/5000Bytes-local:5000/5000Bytes)(+0 +604800 5 4 602800/604800Bytes-local:603000/604800Bytes)(+0 +604800 4 1 602800/604800Bytes-local:603000/604800Bytes)
+Using EB Route in header. Next hop: 4
+*Best: routeTable[1][ ]: nextHop: 4, frm 0 to 5000, arrival time: 0, volume: 3100/5000Bytes
+queuing bundle in node 4(5)
+Node 5 enqueueBundleToNode bundleId: 133 nextNodeId: 4
+Use of the randomness
+With 300 Recovery at 1907.896643259743 seconds at node 2
+Random place 5
+TIME: 1872.49s, NODE: 4, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][4]: nextHop: 4, frm 0 to 5000, arrival time: 0, volume: 3100/5000Bytes
+hops: (+0 +604800 5 4 602900/604800Bytes-local:604800/604800Bytes)(+0 +604800 4 1 602900/604800Bytes-local:603000/604800Bytes)
+Using EB Route in header. Next hop: 1
+*Best: routeTable[1][ ]: nextHop: 1, frm 0 to 5000, arrival time: 0, volume: 3100/5000Bytes
+queuing bundle in node 1(2)
+Node 4 enqueueBundleToNode bundleId: 133 nextNodeId: 1
+Random place 5
+bundlesInSdr: 1
+delay: (omnetpp::cPar)delay true
+numberOfBundlesScheduledThisTime: 0
+2 bundles already in Dtn or scheduled to be sent to dtn
+bundleInSdr: 1 , simTime: 1900  => Bundle sent
+TIME: 1900s, NODE: 6, routing bundle : 6-1 (100Bytes)
+Route: 6 -> 3 -> 2 -> 1
+Route: 6 -> 5 -> 4 -> 1
+41
+BID : 141, FT : 0, TT : 5000, AT : 0, NH : 5 // Chosen route: 6 -> 5 -> 4 -> 1
+*Best: routeTable[1][ ]: nextHop: 5, frm 0 to 5000, arrival time: 0, volume: 3000/5000Bytes
+*Rvol: routeTable[1][1]: updated to 2900Bytes (all contacts)
+queuing bundle in node 5(8)
+Node 6 enqueueBundleToNode bundleId: 141 nextNodeId: 5
+Random place 5
+TIME: 1900s, NODE: 5, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][5]: nextHop: 5, frm 0 to 5000, arrival time: 0, volume: 3000/5000Bytes
+hops: (+0 +5000 6 5 2900/5000Bytes-local:5000/5000Bytes)(+0 +604800 5 4 602700/604800Bytes-local:602900/604800Bytes)(+0 +604800 4 1 602700/604800Bytes-local:602900/604800Bytes)
+Using EB Route in header. Next hop: 4
+*Best: routeTable[1][ ]: nextHop: 4, frm 0 to 5000, arrival time: 0, volume: 3000/5000Bytes
+queuing bundle in node 4(5)
+Node 5 enqueueBundleToNode bundleId: 137 nextNodeId: 4
+Use of the randomness
+With 300 Next fault at 1912.003554417461 seconds at node 2
+Use of the randomness
+With 300 Recovery at 1924.471992295535 seconds at node 2
+Use of the randomness
+With 300 Next fault at 2051.059967538162 seconds at node 2
+Random place 5
+TIME: 1972.49s, NODE: 4, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][4]: nextHop: 4, frm 0 to 5000, arrival time: 0, volume: 3000/5000Bytes
+hops: (+0 +604800 5 4 602800/604800Bytes-local:604800/604800Bytes)(+0 +604800 4 1 602800/604800Bytes-local:602900/604800Bytes)
+Using EB Route in header. Next hop: 1
+*Best: routeTable[1][ ]: nextHop: 1, frm 0 to 5000, arrival time: 0, volume: 3000/5000Bytes
+queuing bundle in node 1(2)
+Node 4 enqueueBundleToNode bundleId: 137 nextNodeId: 1
+Random place 5
+bundlesInSdr: 1
+delay: (omnetpp::cPar)delay true
+numberOfBundlesScheduledThisTime: 0
+2 bundles already in Dtn or scheduled to be sent to dtn
+bundleInSdr: 1 , simTime: 2000  => Bundle sent
+TIME: 2000s, NODE: 6, routing bundle : 6-1 (100Bytes)
+Route: 6 -> 3 -> 2 -> 1
+Route: 6 -> 5 -> 4 -> 1
+45
+BID : 145, FT : 0, TT : 5000, AT : 0, NH : 5 // Chosen route: 6 -> 5 -> 4 -> 1
+*Best: routeTable[1][ ]: nextHop: 5, frm 0 to 5000, arrival time: 0, volume: 2900/5000Bytes
+*Rvol: routeTable[1][1]: updated to 2800Bytes (all contacts)
+queuing bundle in node 5(8)
+Node 6 enqueueBundleToNode bundleId: 145 nextNodeId: 5
+Random place 5
+TIME: 2000s, NODE: 5, routing bundle : 6-1 (100Bytes)
+extensionBlockRoute: [1][5]: nextHop: 5, frm 0 to 5000, arrival time: 0, volume: 2900/5000Bytes
+hops: (+0 +5000 6 5 2800/5000Bytes-local:5000/5000Bytes)(+0 +604800 5 4 602600/604800Bytes-local:602800/604800Bytes)(+0 +604800 4 1 602600/604800Bytes-local:602800/604800Bytes)
+Using EB Route in header. Next hop: 4
+*Best: routeTable[1][ ]: nextHop: 4, frm 0 to 5000, arrival time: 0, volume: 2900/5000Bytes
+queuing bundle in node 4(5)
+Node 5 enqueueBundleToNode bundleId: 141 nextNodeId: 4
+undisposed object: (BundlePkt) dtnsim.node[5].dtn.Src:6,Dst:1(id:141) -- check module destructor
+undisposed object: (BundlePkt) dtnsim.node[6].dtn.Src:6,Dst:1(id:145) -- check module destructor
+
+End.

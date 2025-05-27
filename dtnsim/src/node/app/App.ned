@@ -6,6 +6,7 @@ simple App
         @display("i=block/telnet");
         
         bool enable = default(false); // Traffic Generator Enabled
+        bool delay = default(false);
         string destinationEid = default("1"); // Generated Bundles destination EiD
         string bundlesNumber = default("1"); // Number of Bundles to Generate
         string size = default("1024"); // Generated Bundles Size in Bytes

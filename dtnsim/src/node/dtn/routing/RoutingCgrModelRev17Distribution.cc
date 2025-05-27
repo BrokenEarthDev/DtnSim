@@ -149,7 +149,7 @@ RoutingCgrModelRev17Distribution::~RoutingCgrModelRev17Distribution() {
 // in transit) need to be routed.The outcome of the function
 // is to enqueue the bundle in the SDR memory which is organized
 // by a set of queues addressed by queueIds. In current DtnSim
-// version Ids corresponds with the contact Id where the bundle
+// version Ids corresponds with the contact Id (can be by node now) where the bundle
 // is expected to be forwarded. This mimic ION behaviour. Other
 // implementations do enqueue bundles on a per neighbour-node basis.
 void RoutingCgrModelRev17Distribution::routeAndQueueBundle(BundlePkt * bundle, double simTime) {
@@ -519,7 +519,6 @@ void RoutingCgrModelRev17Distribution::cgrForward(BundlePkt * bundle) {
 			for (; it1 != contactVolume.end(); ++it1, ++it2)
 				(*it2).setResidualVolume(*it1);
 		}
-
 	}
 	if (routingType_.find("routeListType:oneBestPath") != std::string::npos) {
 		//////////////////////////////////////////////////
@@ -752,7 +751,6 @@ void RoutingCgrModelRev17Distribution::cgrForward(BundlePkt * bundle) {
 
 	if (!routeTable_.at(terminusNode).empty()) {
 		
-
 		// Select best route to have equally distributed bundles in to HAGS
 		if (routingType_.find("distribution:equal") != std::string::npos) {
 			vector<CgrRoute>::iterator bestRoute = routeTable_.at(terminusNode).end();

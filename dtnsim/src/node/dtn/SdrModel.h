@@ -42,6 +42,7 @@ public:
 	virtual list<BundlePkt*> * getBundlesInLimboForNode();
 	virtual int getBytesStoredInSdr();
 	virtual int getBytesStoredToNeighbor(int eid);
+	virtual int getNumberOfBundlesToNode(int eid);
 	virtual vector<int> getBundleSizesStoredToNeighbor(int eid);
 	virtual vector<int> getBundleSizesStoredToNeighborWithHigherPriority(int eid, bool critical);
 	virtual SdrStatus getSdrStatus();
@@ -55,7 +56,6 @@ public:
 	virtual void popNextBundleForContact(int contactId);
 
 	// Enqueue and dequeue from perNodeBundleQueue_
-	int getNextNodeFromContact(int contactId);
 	virtual bool enqueueBundleToNode(BundlePkt * bundle, int nodeId);
 	virtual bool isBundleForNode(int nodeId);
 	virtual BundlePkt * getNextBundleForNode(int nodeId);
@@ -71,6 +71,7 @@ public:
 	virtual void removeTransmittedBundleInCustody(long bundleId);
 	virtual BundlePkt * getTransmittedBundleInCustody(long bundleId);
 	virtual list<BundlePkt *> getTransmittedBundlesInCustody();
+
 
 private:
 

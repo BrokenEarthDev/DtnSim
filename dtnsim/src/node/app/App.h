@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <omnetpp.h>
+#include <src/node/dtn/SdrModel.h>
+#include <src/node/dtn/Dtn.h>
 
 #include "src/node/MsgTypes.h"
 #include "src/dtnsim_m.h"
@@ -23,14 +25,19 @@ class App : public cSimpleModule
         virtual vector<int> getDestinationEidVec();
         virtual vector<int> getSizeVec();
         virtual vector<double> getStartVec();
-
+        int numberOfBundlesScheduledThisTime;
+        virtual void keepAction();
     protected:
         virtual void initialize();
         virtual void handleMessage(cMessage *);
         virtual void finish();
-
+       
+        ;
     private:
         int eid_;
+        TrafficGeneratorMsg* trafficGenMsgPtr;
+
+        SdrModel sdr_;
 
         std::vector<int> bundlesNumberVec_;
         std::vector<int> destinationEidVec_;

@@ -1,4 +1,4 @@
-# Guide, findings and future steps
+# Guide and findings
 
 This document provides a guide to the use of the code, an explanation of the results and an overview of future steps by a given date.
 
@@ -74,18 +74,6 @@ New results with cgrModel350 and 33 LEOs (half of all available LEOs) which seem
 
 Show that the issue came from cgrModelRev17, because now with CGRmodel350 all is fine.
 
-## RunTest5 (Influence of SDR size in HAGS)
-We cleary see that having a
-
-## RunTest6 (Influence of ISL)
-
-
-# Future steps
-
-## Agenda
-- We need to address the issue of a slow start to a simulation, especially as we increase the number of LEOs.
-- We need to test with different SDR size in HAGS and GS to see the congestion and how CGR deals with it.
-- Compare the in
 
 
 ### SDR size test
@@ -103,13 +91,6 @@ Graphs shows :
 - for a given topology, the influence of the SDR
 - for a given SDR, how it impact different topologies
 
-
-
-### Intersecting curves issue
-The following items have been tested:
-
-- Not a question of hops, admittedly there are many hops of a single bundle, but it doesn't depend on the number of HAGS/GS in the simulation.
-- It was in fact an issue due to the version of CGR.
 
 
 

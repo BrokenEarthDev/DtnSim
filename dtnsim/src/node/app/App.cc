@@ -2,8 +2,11 @@
 
 Define_Module (App);
 
+
+
 void App::initialize()
 {
+	this->numberOfBundlesScheduledThisTime = 0;
 	// Store this node eid
 	this->eid_ = this->getParentModule()->getIndex();
 
@@ -46,7 +49,9 @@ void App::initialize()
 
 		for (unsigned int i = 0; i < bundlesNumberVec_.size(); i++)
 		{
-			TrafficGeneratorMsg * trafficGenMsg = new TrafficGeneratorMsg("trafGenMsg");
+			// Create the traffic generator message and store the pointer in a member variable
+			this->trafficGenMsgPtr = new TrafficGeneratorMsg("trafGenMsg");
+			TrafficGeneratorMsg * trafficGenMsg = this->trafficGenMsgPtr;
 			trafficGenMsg->setSchedulingPriority(TRAFFIC_TIMER);
 			trafficGenMsg->setKind(TRAFFIC_TIMER);
 			trafficGenMsg->setBundlesNumber(bundlesNumberVec_.at(i));
@@ -130,16 +135,58 @@ void App::handleMessage(cMessage *msg)
 		emptyRoute.nextHop = EMPTY_ROUTE;
 		bundle->setCgrRoute(emptyRoute);
 
+		Dtn *dtn = check_and_cast<Dtn *>(this->getParentModule()->getParentModule()->getSubmodule("node", this->eid_)->getSubmodule("dtn"));
+		int bundlesInSdr = dtn->sdr_.getBundlesCountInSdr();
+
+		cout << "bundlesInSdr: " << bundlesInSdr << endl;
+
 		// Keep generating traffic
 		trafficGenMsg->setBundlesNumber((trafficGenMsg->getBundlesNumber() - 1));
 		if (trafficGenMsg->getBundlesNumber() == 0)
 			delete msg;
 		else
-			scheduleAt(simTime() + trafficGenMsg->getInterval(), msg);
+		{
+			if (par("delay")) // schedule for next time
+			{
+				cout << "delay: " << par("delay") << endl;
+				cout << "numberOfBundlesScheduledThisTime: " << this->numberOfBundlesScheduledThisTime << endl;
+				if (bundlesInSdr + this->numberOfBundlesScheduledThisTime < 1) {
+					cout << "Less than 2 bundles will be in Dtn this time" << endl;
+					scheduleAt(simTime() + trafficGenMsg->getInterval(), msg);
+				} 
+				else {
+					cout << "2 bundles already in Dtn or scheduled to be sent to dtn" << endl;
+					scheduleAt(simTime() + 100 + trafficGenMsg->getInterval(), msg);
+				}
+			}
+			else
+			{
+				cout << "delay: " << par("delay") << endl;
+				scheduleAt(simTime() + trafficGenMsg->getInterval(), msg);
+			}
+		}
 
-		send(bundle, "gateToDtn$o");
-		emit(appBundleSent, true);
-
+		if (par("delay"))
+			if (bundlesInSdr + this->numberOfBundlesScheduledThisTime < 2) {
+				cout << "bundleInSdr: " << bundlesInSdr << " " << ", simTime: " << simTime() << " " << " => Bundle sent" << endl;
+				this->numberOfBundlesScheduledThisTime ++;
+				send(bundle, "gateToDtn$o");
+				emit(appBundleSent, true);
+			}
+			else
+			{
+				trafficGenMsg->setBundlesNumber((trafficGenMsg->getBundlesNumber() + 1));
+				cancelEvent(msg);
+				cout << bundlesInSdr << " " << simTime() << " " << "Bundle resheduled" << endl;
+				scheduleAt(simTime() + 100 + trafficGenMsg->getInterval(), msg);
+				delete bundle;
+			}
+		else
+		{
+			cout << "simTime: " << simTime() << " " << " => Bundle sent" << endl;
+			send(bundle, "gateToDtn$o");
+			emit(appBundleSent, true);
+		}
 		return;
 	}
 	else if (msg->getKind() == BUNDLE)
@@ -159,6 +206,13 @@ void App::handleMessage(cMessage *msg)
 			throw cException("Error: message received in wrong destination");
 		}
 	}
+}
+
+// function called by MarkovRouting to increase by one the number of bundles 
+// that needed to be generated, simuling the fact that a bundle is keeped in the SDR 
+void App::keepAction()
+{
+	this->trafficGenMsgPtr->setBundlesNumber((trafficGenMsgPtr->getBundlesNumber() + 1));
 }
 
 void App::finish()

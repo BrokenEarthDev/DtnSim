@@ -389,7 +389,8 @@ vector<int> Central::getRandomContactIds(int nContacts)
 		{
 			break;
 		}
-
+		
+		cout << "random place 1" << endl;
 		int randomPosition = intuniform(0, contacts->size() - 1);
 		contactIds.push_back(contacts->at(randomPosition).getId());
 
@@ -410,6 +411,7 @@ vector<int> Central::getRandomContactIdsWithFProb(double failureProbability)
        vector<Contact> *contacts = workCP.getContacts();
 
        for(unsigned int i=0; i < contacts->size(); i++){
+		cout << "Random place 3" << endl;
                double randomNumber =  uniform(0, 1);
                if (randomNumber < failureProbability)
                        contactIds.push_back(contacts->at(i).getId());
@@ -427,6 +429,7 @@ vector<int> Central::getContactIdsWithSpecificFProb()
 	vector<Contact>* contacts = workCT.getContacts();
 
 	for(size_t i = 0; i < contacts->size(); i++) {
+		cout << "Random place 4" << endl;
 		double randomNumber = uniform(0,1, 0.5);
 		if (randomNumber < contacts->at(i).getFailureProbability()) {
 			contactIds.push_back(contacts->at(i).getId());
@@ -552,6 +555,7 @@ vector<int> Central::getCentralityContactIds(int nContacts, int nodesNumber)
 			}
 		}
 
+		cout << "Random place 2" << endl;
 		int randomPosition = intuniform(0, allMaxElements.size() - 1);
 
 //		cout<<"centralityMap = "<<endl;

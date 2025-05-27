@@ -1,0 +1,17 @@
+With 300 initializing fault at 318.039 seconds at node 2
+With 300 Recovery at 1218.461038361925 seconds at node 2
+With 300 Next fault at 1836.292802427045 seconds at node 2
+With 300 Recovery at 1907.896643259743 seconds at node 2
+With 300 Next fault at 1912.003554417461 seconds at node 2
+With 300 Recovery at 1924.471992295535 seconds at node 2
+With 300 Next fault at 2051.059967538162 seconds at node 2
+
+With 600 initializing fault at 138.042 seconds at node 4
+With 300 Recovery at 174.694423893103 seconds at node 4
+With 600 Next fault at 740.249005335266 seconds at node 4
+With 300 Recovery at 743.342382749502 seconds at node 4
+With 600 Next fault at 1138.232150687374 seconds at node 4
+With 300 Recovery at 1272.49439644073 seconds at node 4
+With 600 Next fault at 2410.721780914263 seconds at node 4
+
+The phrase 'Random place' appears 15 time(s) in File1.txt.

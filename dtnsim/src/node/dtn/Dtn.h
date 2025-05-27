@@ -8,6 +8,7 @@
 #include <src/node/dtn/routing/RoutingCgrModel350.h>
 #include <src/node/dtn/routing/RoutingCgrModelRev17.h>
 #include <src/node/dtn/routing/RoutingCgrModelRev17Distribution.h>
+#include <src/node/dtn/routing/MarkovRouting.h>
 #include <src/node/dtn/routing/RoutingCgrModelYen.h>
 #include <src/node/dtn/routing/RoutingDirect.h>
 #include <src/node/dtn/routing/RoutingEpidemic.h>
@@ -36,6 +37,7 @@
 #include "src/dtnsim_m.h"
 
 #include "src/node/graphics/Graphics.h"
+#include "src/node/app/App.h"
 #include "src/node/dtn/routing/Routing.h"
 #include "src/utils/RouterUtils.h"
 #include "src/utils/TopologyUtils.h"
@@ -90,6 +92,7 @@ public:
 	void removeCurrentNeighbor(int neighborEid);
 	int checkExistenceOfContact(int sourceEid, int destinationEid, int start);
 	double getSdrSize() const;
+	SdrModel sdr_;
 
 protected:
 	virtual void initialize(int stage);
@@ -130,8 +133,6 @@ private:
 
 	CustodyModel custodyModel_;
 	double custodyTimeout_;
-
-	SdrModel sdr_;
 
 	double sdrSize_;
 
