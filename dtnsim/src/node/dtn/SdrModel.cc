@@ -453,7 +453,10 @@ void SdrModel::removeTransmittedBundleInCustody(long bundleId)
 			bundlesNumber_--;
 			bytesStored_ -= size;
 			notify();
-			//break; // remove all possible instances of the same id
+			// ids are deduplicated at enqueue (see enqueueTransmittedBundleInCustody),
+			// so at most one element matches. Without this break, erasing the list tail
+			// leaves it == end() and the loop's it++ then steps past end() (undefined behavior).
+			break;
 		}
 }
 
