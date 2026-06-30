@@ -127,12 +127,9 @@ void Central::initialize()
 	    	 stringstream stream(toDeleteContactsIds);
 	    	 vector<int> contactIdsToDelete;
 	    	 if (toDeleteContactsIds != "") {
-	    		 while(1) {
-	    			 int n; stream >> n;
+				int n;
+				while (stream >> n)
 	    			 contactIdsToDelete.push_back(n);
-	    			 if(!stream)
-	    				 break;
-	             }
 	    	 }
 	         if (contactIdsToDelete.size() > 0 ){
 	             deleteContacts(contactIdsToDelete, faultsAware);

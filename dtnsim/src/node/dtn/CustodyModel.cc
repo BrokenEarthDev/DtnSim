@@ -68,8 +68,15 @@ BundlePkt * CustodyModel::custodyReportArrived(BundlePkt * custodyReport)
 	{
 		// Custody was rejected by remote node, return a pointer to resend the bundle
 		cout << simTime() << " Node " << eid_ << " ** NOT releasing custody of bundleId " << custodyReport->getCustodyBundleId() << " rejected... do something!" << endl;
-		reSendBundle = sdr_->getTransmittedBundleInCustody(custodyReport->getCustodyBundleId())->dup();
-		sdr_->removeTransmittedBundleInCustody(custodyReport->getCustodyBundleId());
+		// The stored bundle may already be gone (e.g. its custody timer fired first and
+		// removed it), in which case getTransmittedBundleInCustody() returns NULL. Guard
+		// before dereferencing, mirroring custodyTimerExpired() below.
+		BundlePkt * storedBundle = sdr_->getTransmittedBundleInCustody(custodyReport->getCustodyBundleId());
+		if (storedBundle != NULL)
+		{
+			reSendBundle = storedBundle->dup();
+			sdr_->removeTransmittedBundleInCustody(custodyReport->getCustodyBundleId());
+		}
 
 		// TODO: add custody node as forbidden neighbor and reroute custodyBundleId.
 		// Also, a mechanism to remove node from forbidden list must be implemented.

@@ -404,7 +404,7 @@ list<BundlePkt*> SdrModel::getCarryingBundles()
 BundlePkt* SdrModel::getEnqueuedBundle(long bundleId)
 {
 	for (list<BundlePkt*>::iterator it = genericBundleQueue_.begin(); it != genericBundleQueue_.end(); it++)
-		if ((*it)->getBundleId())
+		if ((*it)->getBundleId() == bundleId)
 			return *it;
 
 	return NULL;
@@ -453,7 +453,10 @@ void SdrModel::removeTransmittedBundleInCustody(long bundleId)
 			bundlesNumber_--;
 			bytesStored_ -= size;
 			notify();
-			//break; // remove all possible instances of the same id
+			// ids are deduplicated at enqueue (see enqueueTransmittedBundleInCustody),
+			// so at most one element matches. Without this break, erasing the list tail
+			// leaves it == end() and the loop's it++ then steps past end() (undefined behavior).
+			break;
 		}
 }
 
