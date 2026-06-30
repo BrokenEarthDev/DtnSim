@@ -471,12 +471,19 @@ void Dtn::handleMessage(cMessage *msg)
 				// Calculate data rate and Tx duration
 				double dataRate = contactTopology_.getContactById(contactId)->getDataRate();
 				double txDuration = (double) bundle->getByteLength() / dataRate;
-				double linkDelay = contactTopology_.getRangeBySrcDst(eid_, neighborEid);
-
 				Contact *contact = contactTopology_.getContactById(contactId);
 
-				// if the message can be fully transmitted before the end of the contact, transmit it
-				if ((simTime() + txDuration + linkDelay) <= contact->getEnd())
+				// A bundle only needs to finish transmitting before the contact ends, so we
+				// don't add linkDelay (OWLT) to this check. contact->getEnd() is the end of the
+				// sender's transmission window, not a receiver-side arrival deadline: a bundle
+				// sent during a valid contact keeps propagating after the contact closes. ION/CGR
+				// does the same. libcgr.c (computePBAT, computeDistanceToTerminus) checks
+				// transmission timing against the contact end, never arrival.
+				//
+				// This used to be (simTime() + txDuration + linkDelay) <= getEnd(), which also
+				// required arrival before the contact ended and shrank the usable window at
+				// non-zero OWLT. At OWLT=0 the two are identical.
+				if ((simTime() + txDuration) <= contact->getEnd())
 				{
 					// Set bundle metadata (set by intermediate nodes)
 					bundle->setSenderEid(eid_);
