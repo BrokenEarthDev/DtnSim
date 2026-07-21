@@ -38,7 +38,9 @@ void Central::initialize()
 
 	// emit contactsNumber statistic
 	contactsNumber = registerSignal("contactsNumber");
-	emit(contactsNumber, contactPlan_.getContacts()->size());
+
+	// KARIM - FIX - Casted long
+	emit(contactsNumber, (long) contactPlan_.getContacts()->size());
 
 	bool faultsAware = this->par("faultsAware");
 

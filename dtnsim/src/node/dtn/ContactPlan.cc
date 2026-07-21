@@ -1,5 +1,6 @@
 #include <src/node/dtn/ContactPlan.h>
 
+
 ContactPlan::~ContactPlan()
 {
 
@@ -31,74 +32,59 @@ ContactPlan::ContactPlan(ContactPlan &contactPlan)
 	}
 }
 
-void ContactPlan::parseContactPlanFile(string fileName, int nodesNumber)
+void ContactPlan::parseContactPlanFile(string fileName, int nodesNumber, int contactsToProcess)
 {
-	this->contactIdsBySrc_.resize(nodesNumber + 1);
+    this->contactIdsBySrc_.resize(nodesNumber + 1);
+    double start = 0.0;
+    double end = 0.0;
+    int sourceEid = 0;
+    int destinationEid = 0;
+    double dataRateOrRange = 0.0;
+    string fileLine = "#";
+    string a;
+    string command;
+    int contactsRead = 0;
 
-	double start = 0.0;
-	double end = 0.0;
-	int sourceEid = 0;
-	int destinationEid = 0;
-	double dataRateOrRange = 0.0;
+    ifstream file;
+    file.open(fileName.c_str());
+    if (!file.is_open())
+        throw cException(("Error: wrong path to contacts file " + string(fileName)).c_str());
 
-	string fileLine = "#";
-	string a;
-	string command;
-	ifstream file;
+    while (getline(file, fileLine))
+    {
+        if (fileLine.empty())
+            continue;
+        if (fileLine.at(0) == '#')
+            continue;
 
-	file.open(fileName.c_str());
+        stringstream stringLine(fileLine);
+        stringLine >> a >> command >> start >> end >> sourceEid >> destinationEid >> dataRateOrRange;
 
-	if (!file.is_open())
-		throw cException(("Error: wrong path to contacts file " + string(fileName)).c_str());
+        if (a.compare("a") == 0)
+        {
+            if ((command.compare("contact") == 0))
+            {
+                // stop once the requested number of contacts has been read
+                if (contactsToProcess >= 0 && contactsRead >= contactsToProcess)
+                    break;
+                this->addContact(start, end, sourceEid, destinationEid, dataRateOrRange, (float) 1.0);
+                contactsRead++;
+            }
+            else if ((command.compare("range") == 0))
+            {
+                this->addRange(start, end, sourceEid, destinationEid, dataRateOrRange, (float) 1.0);
+            }
+            else
+            {
+                cout << "dtnsim error: unknown contact plan command type: a " << fileLine << endl;
+            }
+        }
+    }
 
-	while (getline(file, fileLine))
-	{
-		if (fileLine.empty())
-			continue;
-
-		if (fileLine.at(0) == '#')
-			continue;
-
-		// This seems to be a valid command line, parse it
-		stringstream stringLine(fileLine);
-		stringLine >> a >> command >> start >> end >> sourceEid >> destinationEid >> dataRateOrRange;
-
-		if (a.compare("a") == 0)
-		{
-			if ((command.compare("contact") == 0))
-			{
-				this->addContact(start, end, sourceEid, destinationEid, dataRateOrRange, (float) 1.0);
-			}
-			else if ((command.compare("range") == 0))
-			{
-				this->addRange(start, end, sourceEid, destinationEid, dataRateOrRange, (float) 1.0);
-			}
-			else
-			{
-				cout << "dtnsim error: unknown contact plan command type: a " << fileLine << endl;
-			}
-		}
-	}
-
-	if (cin.bad())
-	{
-		// IO error
-	}
-	else if (!cin.eof())
-	{
-		// format error (not possible with getline but possible with operator>>)
-	}
-	else
-	{
-		// format error (not possible with getline but possible with operator>>)
-		// or end of file (can't make the difference)
-	}
-
-	file.close();
-
-	this->setContactsFile(fileName);
-	this->updateContactRanges();
-	this->sortContactIdsBySrcByStartTime();
+    file.close();
+    this->setContactsFile(fileName);
+    this->updateContactRanges();
+    this->sortContactIdsBySrcByStartTime();
 }
 
 int ContactPlan::addContact(double start, double end, int sourceEid, int destinationEid, double dataRate, float confidence)

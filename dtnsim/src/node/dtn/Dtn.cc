@@ -1,3 +1,13 @@
+// KARIM - FIX - Added guards
+#ifdef _WIN32
+  #include <direct.h>
+  #define MAKE_DIR(path) _mkdir(path)
+#else
+  #include <sys/stat.h>
+  #include <sys/types.h>
+  #define MAKE_DIR(path) mkdir(path, 0700)
+#endif
+
 #include "src/node/dtn/Dtn.h"
 #include "src/node/app/App.h"
 
@@ -187,7 +197,8 @@ void Dtn::initialize(int stage)
 			{ 0 };
 			if (stat("results", &st) == -1)
 			{
-				mkdir("results", 0700);
+				// KARIM - FIX - renamed fun
+				MAKE_DIR("results");
 			}
 
 			string fileStr = "results/BundleMap_Node" + to_string(eid_) + ".csv";
@@ -410,7 +421,8 @@ void Dtn::dispatchBundle(BundlePkt *bundle)
 		emit(dtnBundleSentToAppHopCount, bundle->getHopCount());
 		bundle->getVisitedNodes().sort();
 		bundle->getVisitedNodes().unique();
-		emit(dtnBundleSentToAppRevisitedHops, bundle->getHopCount() - bundle->getVisitedNodes().size());
+		// KARIM - FIX - added cast
+		emit(dtnBundleSentToAppRevisitedHops, (long)(bundle->getHopCount() - bundle->getVisitedNodes().size()));
 
 		// Check if this bundle has previously arrived here
 		if (routing->msgToMeArrive(bundle))

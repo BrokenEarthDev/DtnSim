@@ -31,7 +31,10 @@ public:
 	vector<Contact> getContactsByDst(int Dst);
 	vector<Contact> getContactsBySrcDst(int Src, int Dst);
 	double getRangeBySrcDst(int Src, int Dst);
-	void parseContactPlanFile(string fileName, int nodesNumber);
+
+	// KARIM - FIX - Added one more parameter.
+	//void parseContactPlanFile(string fileName, int nodesNumber);
+	void parseContactPlanFile(string fileName, int nodesNumber, int contactsToProcess = -1);
 	void setContactsFile(string contactsFile);
 	const string& getContactsFile() const;
 	simtime_t getLastEditTime();

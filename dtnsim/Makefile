@@ -40,11 +40,11 @@ OBJS = \
     $O/src/node/dtn/Dtn.o \
     $O/src/node/dtn/SdrModel.o \
     $O/src/node/dtn/SdrStatus.o \
-    $O/src/node/dtn/routing/RoutingCgrModelCentralized.o \
     $O/src/node/dtn/routing/RoutingCgrModel350.o \
     $O/src/node/dtn/routing/RoutingCgrModel350_2Copies.o \
     $O/src/node/dtn/routing/RoutingCgrModel350_Hops.o \
     $O/src/node/dtn/routing/RoutingCgrModel350_Probabilistic.o \
+    $O/src/node/dtn/routing/RoutingCgrModelCentralized.o \
     $O/src/node/dtn/routing/RoutingCgrModelRev17.o \
     $O/src/node/dtn/routing/RoutingCgrModelYen.o \
     $O/src/node/dtn/routing/RoutingDeterministic.o \
