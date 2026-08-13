@@ -33,6 +33,7 @@ O = $(PROJECT_OUTPUT_DIR)/$(CONFIGNAME)/$(PROJECTRELATIVE_PATH)
 OBJS = \
     $O/src/central/Central.o \
     $O/src/node/app/App.o \
+    $O/src/node/app/CoapApp.o \
     $O/src/node/com/Com.o \
     $O/src/node/dtn/Contact.o \
     $O/src/node/dtn/ContactPlan.o \

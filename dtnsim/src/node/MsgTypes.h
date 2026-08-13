@@ -22,4 +22,6 @@
 #define FAULT_END_TIMER 21
 #define FAULT_START_TIMER 20
 
+#define COAP_RETX_TIMER 22   // KARIM: CoapApp-local self-message: CON ack-timeout / retransmit timer
+
 #endif /* SRC_NODE_MSGTYPES_H_ */

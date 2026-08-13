@@ -72,6 +72,16 @@
  *     // 2 to route by hops and delivery time (making a copy)
  *     int qos;
  * 
+ *     // KARIM: Added CoAP over BP fields
+ *     ////////////////////////////////////////////////
+ *     // CoAP-over-BP fields (set by CoapApp; carried
+ *     // as extra bundle metadata — Dtn/Com ignore these)
+ *     ////////////////////////////////////////////////
+ *     int coapMessageId;     // CoAP Message ID for this exchange; echoed back in the ACK
+ *     int coapToken;         // CoAP Token; matches a response to its original request
+ *     int coapType;          // 0 = CON (needs ACK), 1 = NON (fire-and-forget), 2 = ACK
+ *     int coapPayloadLength; // size of the CoAP payload this bundle carries, for chunk reassembly
+ * 
  * }
  * </pre>
  */
@@ -99,6 +109,10 @@ class BundlePkt : public ::omnetpp::cPacket
     double dlvConfidence;
     int bundlesCopies;
     int qos;
+    int coapMessageId;
+    int coapToken;
+    int coapType;
+    int coapPayloadLength;
 
   private:
     void copy(const BundlePkt& other);
@@ -161,13 +175,21 @@ class BundlePkt : public ::omnetpp::cPacket
     virtual void setBundlesCopies(int bundlesCopies);
     virtual int getQos() const;
     virtual void setQos(int qos);
+    virtual int getCoapMessageId() const;
+    virtual void setCoapMessageId(int coapMessageId);
+    virtual int getCoapToken() const;
+    virtual void setCoapToken(int coapToken);
+    virtual int getCoapType() const;
+    virtual void setCoapType(int coapType);
+    virtual int getCoapPayloadLength() const;
+    virtual void setCoapPayloadLength(int coapPayloadLength);
 };
 
 inline void doParsimPacking(omnetpp::cCommBuffer *b, const BundlePkt& obj) {obj.parsimPack(b);}
 inline void doParsimUnpacking(omnetpp::cCommBuffer *b, BundlePkt& obj) {obj.parsimUnpack(b);}
 
 /**
- * Class generated from <tt>src/dtnsim.msg:60</tt> by nedtool.
+ * Class generated from <tt>src/dtnsim.msg:70</tt> by nedtool.
  * <pre>
  * message TrafficGeneratorMsg
  * {
@@ -221,7 +243,7 @@ inline void doParsimPacking(omnetpp::cCommBuffer *b, const TrafficGeneratorMsg& 
 inline void doParsimUnpacking(omnetpp::cCommBuffer *b, TrafficGeneratorMsg& obj) {obj.parsimUnpack(b);}
 
 /**
- * Class generated from <tt>src/dtnsim.msg:68</tt> by nedtool.
+ * Class generated from <tt>src/dtnsim.msg:78</tt> by nedtool.
  * <pre>
  * message ContactMsg
  * {
@@ -283,7 +305,7 @@ inline void doParsimPacking(omnetpp::cCommBuffer *b, const ContactMsg& obj) {obj
 inline void doParsimUnpacking(omnetpp::cCommBuffer *b, ContactMsg& obj) {obj.parsimUnpack(b);}
 
 /**
- * Class generated from <tt>src/dtnsim.msg:78</tt> by nedtool.
+ * Class generated from <tt>src/dtnsim.msg:88</tt> by nedtool.
  * <pre>
  * message ForwardingMsgEnd
  * {
@@ -333,7 +355,7 @@ inline void doParsimPacking(omnetpp::cCommBuffer *b, const ForwardingMsgEnd& obj
 inline void doParsimUnpacking(omnetpp::cCommBuffer *b, ForwardingMsgEnd& obj) {obj.parsimUnpack(b);}
 
 /**
- * Class generated from <tt>src/dtnsim.msg:85</tt> by nedtool.
+ * Class generated from <tt>src/dtnsim.msg:95</tt> by nedtool.
  * <pre>
  * message ForwardingMsgStart
  * {
@@ -375,7 +397,7 @@ inline void doParsimPacking(omnetpp::cCommBuffer *b, const ForwardingMsgStart& o
 inline void doParsimUnpacking(omnetpp::cCommBuffer *b, ForwardingMsgStart& obj) {obj.parsimUnpack(b);}
 
 /**
- * Class generated from <tt>src/dtnsim.msg:90</tt> by nedtool.
+ * Class generated from <tt>src/dtnsim.msg:100</tt> by nedtool.
  * <pre>
  * message CustodyTimout
  * {

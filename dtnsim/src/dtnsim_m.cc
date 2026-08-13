@@ -200,6 +200,10 @@ BundlePkt::BundlePkt(const char *name, short kind) : ::omnetpp::cPacket(name,kin
     this->dlvConfidence = 0;
     this->bundlesCopies = 0;
     this->qos = 0;
+    this->coapMessageId = 0;
+    this->coapToken = 0;
+    this->coapType = 0;
+    this->coapPayloadLength = 0;
 }
 
 BundlePkt::BundlePkt(const BundlePkt& other) : ::omnetpp::cPacket(other)
@@ -242,6 +246,10 @@ void BundlePkt::copy(const BundlePkt& other)
     this->dlvConfidence = other.dlvConfidence;
     this->bundlesCopies = other.bundlesCopies;
     this->qos = other.qos;
+    this->coapMessageId = other.coapMessageId;
+    this->coapToken = other.coapToken;
+    this->coapType = other.coapType;
+    this->coapPayloadLength = other.coapPayloadLength;
 }
 
 void BundlePkt::parsimPack(omnetpp::cCommBuffer *b) const
@@ -268,6 +276,10 @@ void BundlePkt::parsimPack(omnetpp::cCommBuffer *b) const
     doParsimPacking(b,this->dlvConfidence);
     doParsimPacking(b,this->bundlesCopies);
     doParsimPacking(b,this->qos);
+    doParsimPacking(b,this->coapMessageId);
+    doParsimPacking(b,this->coapToken);
+    doParsimPacking(b,this->coapType);
+    doParsimPacking(b,this->coapPayloadLength);
 }
 
 void BundlePkt::parsimUnpack(omnetpp::cCommBuffer *b)
@@ -294,6 +306,10 @@ void BundlePkt::parsimUnpack(omnetpp::cCommBuffer *b)
     doParsimUnpacking(b,this->dlvConfidence);
     doParsimUnpacking(b,this->bundlesCopies);
     doParsimUnpacking(b,this->qos);
+    doParsimUnpacking(b,this->coapMessageId);
+    doParsimUnpacking(b,this->coapToken);
+    doParsimUnpacking(b,this->coapType);
+    doParsimUnpacking(b,this->coapPayloadLength);
 }
 
 long BundlePkt::getBundleId() const
@@ -506,6 +522,46 @@ void BundlePkt::setQos(int qos)
     this->qos = qos;
 }
 
+int BundlePkt::getCoapMessageId() const
+{
+    return this->coapMessageId;
+}
+
+void BundlePkt::setCoapMessageId(int coapMessageId)
+{
+    this->coapMessageId = coapMessageId;
+}
+
+int BundlePkt::getCoapToken() const
+{
+    return this->coapToken;
+}
+
+void BundlePkt::setCoapToken(int coapToken)
+{
+    this->coapToken = coapToken;
+}
+
+int BundlePkt::getCoapType() const
+{
+    return this->coapType;
+}
+
+void BundlePkt::setCoapType(int coapType)
+{
+    this->coapType = coapType;
+}
+
+int BundlePkt::getCoapPayloadLength() const
+{
+    return this->coapPayloadLength;
+}
+
+void BundlePkt::setCoapPayloadLength(int coapPayloadLength)
+{
+    this->coapPayloadLength = coapPayloadLength;
+}
+
 class BundlePktDescriptor : public omnetpp::cClassDescriptor
 {
   private:
@@ -571,7 +627,7 @@ const char *BundlePktDescriptor::getProperty(const char *propertyname) const
 int BundlePktDescriptor::getFieldCount() const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
-    return basedesc ? 21+basedesc->getFieldCount() : 21;
+    return basedesc ? 25+basedesc->getFieldCount() : 25;
 }
 
 unsigned int BundlePktDescriptor::getFieldTypeFlags(int field) const
@@ -604,8 +660,12 @@ unsigned int BundlePktDescriptor::getFieldTypeFlags(int field) const
         FD_ISEDITABLE,
         FD_ISEDITABLE,
         FD_ISEDITABLE,
+        FD_ISEDITABLE,
+        FD_ISEDITABLE,
+        FD_ISEDITABLE,
+        FD_ISEDITABLE,
     };
-    return (field>=0 && field<21) ? fieldTypeFlags[field] : 0;
+    return (field>=0 && field<25) ? fieldTypeFlags[field] : 0;
 }
 
 const char *BundlePktDescriptor::getFieldName(int field) const
@@ -638,8 +698,12 @@ const char *BundlePktDescriptor::getFieldName(int field) const
         "dlvConfidence",
         "bundlesCopies",
         "qos",
+        "coapMessageId",
+        "coapToken",
+        "coapType",
+        "coapPayloadLength",
     };
-    return (field>=0 && field<21) ? fieldNames[field] : nullptr;
+    return (field>=0 && field<25) ? fieldNames[field] : nullptr;
 }
 
 int BundlePktDescriptor::findField(const char *fieldName) const
@@ -667,6 +731,10 @@ int BundlePktDescriptor::findField(const char *fieldName) const
     if (fieldName[0]=='d' && strcmp(fieldName, "dlvConfidence")==0) return base+18;
     if (fieldName[0]=='b' && strcmp(fieldName, "bundlesCopies")==0) return base+19;
     if (fieldName[0]=='q' && strcmp(fieldName, "qos")==0) return base+20;
+    if (fieldName[0]=='c' && strcmp(fieldName, "coapMessageId")==0) return base+21;
+    if (fieldName[0]=='c' && strcmp(fieldName, "coapToken")==0) return base+22;
+    if (fieldName[0]=='c' && strcmp(fieldName, "coapType")==0) return base+23;
+    if (fieldName[0]=='c' && strcmp(fieldName, "coapPayloadLength")==0) return base+24;
     return basedesc ? basedesc->findField(fieldName) : -1;
 }
 
@@ -700,8 +768,12 @@ const char *BundlePktDescriptor::getFieldTypeString(int field) const
         "double",
         "int",
         "int",
+        "int",
+        "int",
+        "int",
+        "int",
     };
-    return (field>=0 && field<21) ? fieldTypeStrings[field] : nullptr;
+    return (field>=0 && field<25) ? fieldTypeStrings[field] : nullptr;
 }
 
 const char **BundlePktDescriptor::getFieldPropertyNames(int field) const
@@ -789,6 +861,10 @@ std::string BundlePktDescriptor::getFieldValueAsString(void *object, int field, 
         case 18: return double2string(pp->getDlvConfidence());
         case 19: return long2string(pp->getBundlesCopies());
         case 20: return long2string(pp->getQos());
+        case 21: return long2string(pp->getCoapMessageId());
+        case 22: return long2string(pp->getCoapToken());
+        case 23: return long2string(pp->getCoapType());
+        case 24: return long2string(pp->getCoapPayloadLength());
         default: return "";
     }
 }
@@ -822,6 +898,10 @@ bool BundlePktDescriptor::setFieldValueAsString(void *object, int field, int i, 
         case 18: pp->setDlvConfidence(string2double(value)); return true;
         case 19: pp->setBundlesCopies(string2long(value)); return true;
         case 20: pp->setQos(string2long(value)); return true;
+        case 21: pp->setCoapMessageId(string2long(value)); return true;
+        case 22: pp->setCoapToken(string2long(value)); return true;
+        case 23: pp->setCoapType(string2long(value)); return true;
+        case 24: pp->setCoapPayloadLength(string2long(value)); return true;
         default: return false;
     }
 }

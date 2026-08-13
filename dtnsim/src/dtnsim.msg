@@ -55,6 +55,16 @@ packet BundlePkt{
         // 2 to route by hops and delivery time (making a copy)
         int qos;
         
+        // KARIM: Added CoAP over BP fields
+		////////////////////////////////////////////////
+		// CoAP-over-BP fields (set by CoapApp; carried
+		// as extra bundle metadata — Dtn/Com ignore these)
+		////////////////////////////////////////////////
+		int coapMessageId;     // CoAP Message ID for this exchange; echoed back in the ACK
+		int coapToken;         // CoAP Token; matches a response to its original request
+		int coapType;          // 0 = CON (needs ACK), 1 = NON (fire-and-forget), 2 = ACK
+		int coapPayloadLength; // size of the CoAP payload this bundle carries, for chunk reassembly
+        
 };
 
 message TrafficGeneratorMsg{

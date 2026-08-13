@@ -1,0 +1,52 @@
+file 1710 1786651245                                            
+version 2
+run General-0-20260813-22:59:09-30416
+attr configname General
+attr datetime 20260813-22:59:09
+attr experiment General
+attr inifile traffic_earthMars.ini
+attr iterationvars ""
+attr iterationvarsf ""
+attr measurement ""
+attr network src.dtnsim
+attr processid 30416
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+param dtnsim.node[*].dtn.sdrSize 1024
+param dtnsim.nodesNumber 2
+param dtnsim.node[1].icon "\"satellite\""
+param dtnsim.node[2].icon "\"satellite\""
+param dtnsim.node[*].dtn.routing "\"cgrModelRev17\""
+param dtnsim.central.contactsFile "\"contactPlan/cPlanEarthMars.txt\""
+param dtnsim.node[*].dtn.routingType "\"routeListType:allPaths-firstEnding,volumeAware:allContacts,extensionBlock:on,contactPlan:global\""
+param dtnsim.node[*].dtn.printRoutingDebug true
+param dtnsim.node[1].app.enable true
+param dtnsim.node[1].app.bundlesNumber "\"100\""
+param dtnsim.node[1].app.start "\"0\""
+param dtnsim.node[1].app.destinationEid "\"2\""
+param dtnsim.node[1].app.size "\"128\""
+
+vector 0 dtnsim.node[1].dtn sdrBundleStored:vector ETV
+attr interpolationmode none
+attr source sdrBundleStored
+attr title "sdrBundleStored, vector"
+vector 1 dtnsim.node[1].dtn sdrBytesStored:vector ETV
+attr interpolationmode none
+attr source sdrBytesStored
+attr title "sdrBytesStored, vector"
+vector 2 dtnsim.node[2].dtn sdrBundleStored:vector ETV
+attr interpolationmode none
+attr source sdrBundleStored
+attr title "sdrBundleStored, vector"
+vector 3 dtnsim.node[2].dtn sdrBytesStored:vector ETV
+attr interpolationmode none
+attr source sdrBytesStored
+attr title "sdrBytesStored, vector"
+0	1672 9 0 0 0 0 1 0 0 0 0
+1	1681 9 0 0 0 0 1 0 0 0 0
+2	1690 9 0 0 0 0 1 0 0 0 0
+3	1699 9 0 0 0 0 1 0 0 0 0
+
